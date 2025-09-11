@@ -83,6 +83,10 @@ class Drug extends Model
         return $this->updated_at;
     }
 
+    public function getSupplier(): int
+    {
+        return $this->supplier_id;
+    }
     /*
      *SETTERS
     */
@@ -116,11 +120,21 @@ class Drug extends Model
         $this->price = $price;
     }
 
+    public function setSupplier(int $id): void
+    {
+        $this->supplier_id = $id;
+    }
+
     /*
      * VALIDATE
     */
     public static function validate(array $drugDataValidated): array
     {
         return validator($drugDataValidated, static::$rules)->validate();
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
     }
 }

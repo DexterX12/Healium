@@ -84,4 +84,9 @@ class Supplier extends Model
     {
         return validator($supplierDataValidated, static::$rules)->validate();
     }
+
+    public function drugs()
+    {
+        return $this->hasMany(Drug::class);
+    }
 }
