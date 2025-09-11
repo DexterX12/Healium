@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Supplier extends Model
 {
@@ -59,6 +60,10 @@ class Supplier extends Model
         return $this->updated_at;
     }
 
+    public function getDrugs(): Drug
+    {
+        return $this->drugs;
+    }
     /*
      * SETTERS
     */
@@ -77,6 +82,10 @@ class Supplier extends Model
         $this->address = $address;
     }
 
+    public function setDrugs(Drug $drugs): void
+    {
+        $this->drugs = $drugs;
+    }
     /*
      * VALIDATE
     */
@@ -85,7 +94,7 @@ class Supplier extends Model
         return validator($supplierDataValidated, static::$rules)->validate();
     }
 
-    public function drugs()
+    public function drugs(): HasMany
     {
         return $this->hasMany(Drug::class);
     }
