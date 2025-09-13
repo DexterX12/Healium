@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Drug;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\View\View;
+use Illuminate\View\View;
 
 class DrugController extends Controller
 {

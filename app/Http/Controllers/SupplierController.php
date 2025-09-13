@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\View\View as ViewView;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Http\View\View;
+use App\Models\Supplier;
+use Illuminate\Http\RedirectResponse;
 
 class SupplierController extends Controller
 {
     public function index(): View
     {
         $viewData = [];
-        $viewData['suppliers'] = Supplier::al();
+        $viewData['suppliers'] = Supplier::all();
 
         return view('supplier.index')->with('viewData', $viewData);
     }
-    public function save(Request $request): View
+    public function save(Request $request): RedirectResponse
     {
         $dataSupplierValidated = Supplier::validate($request->all());
         Supplier::create($dataSupplierValidated);
@@ -25,7 +26,7 @@ class SupplierController extends Controller
             ->with('success', 'Supplier created successfully');
     }
 
-    public function delete(int $id): View
+    public function delete(int $id): RedirectResponse
     {
         $supplier = Supplier::findOrFail($id);
         $supplier->delete();
