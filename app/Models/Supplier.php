@@ -18,7 +18,7 @@ class Supplier extends Model
      * $this->attributes['name'] - string - contains the supplier name
      * $this->attributes['email'] - string - contains the supplier email
      * $this->attributes['address'] - string - contains the supplier address
-     * $this->drugs - Collection - contains a list of associated drugs 
+     * $this->drugs - drugs[] - contains a list of associated drugs 
     */
 
     protected $fillable = [

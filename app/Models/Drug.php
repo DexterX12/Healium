@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use App\Models\Item;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Drug extends Model
 {
@@ -19,9 +23,11 @@ class Drug extends Model
      * $this->attributes['chemical_details'] - string - contains the drug quimic details
      * $this->attributes['keywords'] - string - contains the drug keywords
      * $this->attributes['price'] - int- contains the drug price
-     * $this->attributes['created_at'] - date - contains the drug creation date
-     * $this->attributes['updated_at'] - date - contains the drug update date
-     */
+     * $this->attributes['created_at'] - timestamp - contains the drug creation date
+     * $this->attributes['updated_at'] - timestamp - contains the drug update date
+     * $this->items - Item[] - contains the associated items 
+     * $this->supplier - Supplier - contains the associated supplier
+    */
 
     protected $fillable = [
         'name',
@@ -38,7 +44,7 @@ class Drug extends Model
         'description' => 'required|string|max:255',
         'category' => 'required|string|max:60',
         'chemical_details' => 'required|string|max:255',
-        'price' => 'required|integer|min:0',
+        'price' => 'required|numeric|min:0',
     ];
 
     /*
@@ -84,13 +90,20 @@ class Drug extends Model
         return $this->attributes['updated_at'];
     }
 
-    public function getSupplier(): int
+    public function getSupplierId(): int
     {
         return $this->attributes['supplier_id'];
     }
+
+    public function getSupplier(): Supplier
+    {
+        return $this->supplier;
+    }
+
     /*
      *SETTERS
     */
+
     public function setDescription(string $description): void
     {
         $this->attributes['description'] = $description;
@@ -126,9 +139,14 @@ class Drug extends Model
         $this->attributes['price'] = $price;
     }
 
-    public function setSupplier(int $id): void
+    public function setSupplierId(int $id): void
     {
         $this->attributes['supplier_id'] = $id;
+    }
+
+    public function setSupplier(Supplier $supplier): void
+    {
+        $this->supplier = $supplier;
     }
 
     /*
@@ -139,14 +157,14 @@ class Drug extends Model
         return validator($drugDataValidated, static::$rules)->validate();
     }
 
-    public function supplier()
+    public function supplier(): BelongsTo
     {
         return $this->belongsTo(Supplier::class);
     }
 
-    public function items()
+    public function items(): HasMany
     {
-        return $this->belongsTo(Item::class);
+        return $this->hasMany(Item::class);
     }
 }
 
