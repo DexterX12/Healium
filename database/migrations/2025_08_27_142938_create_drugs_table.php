@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('img_path');
             $table->unsignedBigInteger('supplier_id');
             $table->string('description');
-            $table->date('creation_date');
             $table->string('category');
             $table->string('chemical_details');
             $table->string('keywords');

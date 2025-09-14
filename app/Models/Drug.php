@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use App\Models\Item;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Drug extends Model
 {
@@ -31,8 +30,8 @@ class Drug extends Model
 
     protected $fillable = [
         'name',
+        'supplier_id',
         'description',
-        'creation_date',
         'category',
         'chemical_details',
         'keywords',
@@ -41,6 +40,7 @@ class Drug extends Model
 
     public static array $rules = [
         'name' => 'required|string|max:255',
+        'supplier_id' => 'required|exists:suppliers,id',
         'description' => 'required|string|max:255',
         'category' => 'required|string|max:60',
         'chemical_details' => 'required|string|max:255',
@@ -95,10 +95,16 @@ class Drug extends Model
         return $this->attributes['supplier_id'];
     }
 
+    public function getImage(): string
+    {
+        return $this->attributes['img_path'];
+    }
+    
     public function getSupplier(): Supplier
     {
         return $this->supplier;
     }
+
 
     /*
      *SETTERS
@@ -142,6 +148,11 @@ class Drug extends Model
     public function setSupplierId(int $id): void
     {
         $this->attributes['supplier_id'] = $id;
+    }
+
+    public function setImage(string $img_path): void
+    {
+        $this->attributes['img_path'] = $img_path;
     }
 
     public function setSupplier(Supplier $supplier): void
