@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->date('creation_date');
             $table->string('category');
-            $table->string('quimic_details');
+            $table->string('chemical_details');
             $table->string('keywords');
             $table->integer('price');
             $table->foreign('supplier_id')->references('id')->on('suppliers');

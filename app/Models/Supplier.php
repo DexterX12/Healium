@@ -2,19 +2,25 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
+use Carbon\Carbon;
 
 class Supplier extends Model
 {
+
     /**
      * PRODUCT ATTRIBUTES
      * $this->attributes['id'] - int - contains the supplier primary key (id)
      * $this->attributes['name'] - string - contains the supplier name
      * $this->attributes['email'] - string - contains the supplier email
      * $this->attributes['address'] - string - contains the supplier address
-     */
+     * $this->drugs - Collection - contains a list of associated drugs 
+    */
+
     protected $fillable = [
         'name',
         'email',
@@ -32,59 +38,69 @@ class Supplier extends Model
     */
     public function getId(): int
     {
-        return $this->id;
+        return $this->attributes['id'];
     }
 
     public function getName(): string
     {
-        return $this->name;
+        return $this->attributes['name'];
     }
 
     public function getEmail(): string
     {
-        return $this->email;
+        return $this->attributes['email'];
     }
 
     public function getAddress(): string
     {
-        return $this->address;
+        return $this->attributes['address'];
     }
 
-    public function getCreatedAt(): Date
+    public function getCreatedAtTimestamp(): Date
     {
-        return $this->created_at;
+        return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAt(): Date
+    public function getUpdatedAtTimestamp(): Date
     {
-        return $this->updated_at;
+        return $this->attributes['updated_at'];
     }
 
-    public function getDrugs(): Drug
+    public function getDrugs(): Collection
     {
-        return $this->drugs;
+        return $this->attributes['drugs'];
     }
     /*
      * SETTERS
     */
     public function setName(string $name): void
     {
-        $this->name = $name;
+        $this->attributes['name'] = $name;
     }
 
     public function setEmail(string $email): void
     {
-        $this->email = $email;
+        $this->attributes['email'] = $email;
     }
 
     public function setAddress(string $address): void
     {
-        $this->address = $address;
+        $this->attributes['address'] = $address;
     }
 
-    public function setDrugs(Drug $drugs): void
+    public function setCreatedAtTimestamp(Carbon $createdAt): void
     {
-        $this->drugs = $drugs;
+        $this->attributes['created_at'] = $createdAt;
+    }
+
+    public function setUpdatedAtTimestamp(Carbon $updatedAt): void
+    {
+        $this->attributes['updated_at'] = $updatedAt;
+    }
+
+    public function setDrugs(Collection $drugs): void
+    {
+        $this->attributes['drugs'] = $drugs;
     }
     /*
      * VALIDATE
@@ -99,3 +115,4 @@ class Supplier extends Model
         return $this->hasMany(Drug::class);
     }
 }
+

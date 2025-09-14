@@ -143,12 +143,12 @@ class User extends Authenticatable
         $this->attributes['is_admin'] = $adminStatus;
     }
 
-    public function setCreatedAt($createdAt): void
+    public function setCreatedAtTimestamp(Carbon $createdAt): void
     {
         $this->attributes['created_at'] = $createdAt;
     }
 
-    public function setUpdatedAt($updatedAt): void
+    public function setUpdatedAtTimestamp(Carbon $updatedAt): void
     {
         $this->attributes['updated_at'] = $updatedAt;
     }

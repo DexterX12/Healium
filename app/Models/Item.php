@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Models;
 
+use App\Models\Drug;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Item extends Model
 {
@@ -13,9 +15,9 @@ class Item extends Model
      * $this->attributes['order_id'] - string - contains the order's id
      * $this->attributes['quantity'] - int - contains the ordered amount of an item
      * $this->attirbutes['total'] - int - contains the total of the order
+     * this->drug - Drug - contains the associated drug
+     * this->order - Order - contains the associated order
     **/
-
-    protected $fillable = ['quantity', 'total'];
 
     /* GETTERS */
 
@@ -44,7 +46,17 @@ class Item extends Model
         return $this->attributes['total'];
     }
 
-    /* GETTERS */
+    public function getDrug(): Drug
+    {
+        return $this->drug;
+    }
+
+    public function getOrder(): Order
+    {
+        return $this->order;
+    }
+
+    /* SETTERS */
 
     public function setId(int $id): void
     {
@@ -69,5 +81,15 @@ class Item extends Model
     public function setTotal(int $total): void
     {
         $this->attributes['total'] = $total;
+    }
+
+    public function setDrug(Drug $drug): void
+    {
+        $this->drug = $drug;
+    }
+
+    public function setOrder(Order $order): void
+    {
+        $this->order = $order;
     }
 }

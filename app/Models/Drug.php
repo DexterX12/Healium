@@ -2,36 +2,42 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Date;
+use Carbon\Carbon;
 
 class Drug extends Model
 {
+
     /**
      * PRODUCT ATTRIBUTES
      * $this->attributes['id'] - int - contains the drug primary key (id)
+     * $this->attributes['supplier_id'] - int - contains the supplier associated to the drug
+     * $this->attributes['name'] - string - contains the drug name
      * $this->attributes['description'] - string - contains the drug description
-     * $this->attributes['creation_date'] - date - contains the drug creation date
      * $this->attributes['category'] - string - contains the drug category
-     * $this->attributes['quimic_details'] - string - contains the drug quimic details
+     * $this->attributes['chemical_details'] - string - contains the drug quimic details
      * $this->attributes['keywords'] - string - contains the drug keywords
      * $this->attributes['price'] - int- contains the drug price
-     * $this->attributes['supplier_id'] - int - contains the supplier associated to the drug
+     * $this->attributes['created_at'] - date - contains the drug creation date
+     * $this->attributes['updated_at'] - date - contains the drug update date
      */
+
     protected $fillable = [
+        'name',
         'description',
         'creation_date',
         'category',
-        'quimic_details',
+        'chemical_details',
         'keywords',
         'price',
     ];
 
     public static array $rules = [
+        'name' => 'required|string|max:255',
         'description' => 'required|string|max:255',
-        'creation_date' => 'requited|date',
         'category' => 'required|string|max:60',
-        'quimic_details' => 'required|string|max:255',
+        'chemical_details' => 'required|string|max:255',
         'price' => 'required|integer|min:0',
     ];
 
@@ -40,89 +46,89 @@ class Drug extends Model
     */
     public function getId(): int
     {
-        return $this->id;
+        return $this->attributes['id'];
     }
 
     public function getDescription(): string
     {
-        return $this->description;
+        return $this->attributes['description'];
     }
 
     public function getCategory(): string
     {
-        return $this->category;
+        return $this->attributes['category'];
     }
 
-    public function getCreatedDate(): Date
+    public function getChemicalDetails(): string
     {
-        return $this->creation_date;
-    }
-
-    public function getQuimicDetails(): string
-    {
-        return $this->quimic_details;
+        return $this->attributes['chemical_details'];
     }
 
     public function getKeywords(): string
     {
-        return $this->keywords;
+        return $this->attributes['keywords'];
     }
 
     public function getPrice(): int
     {
-        return $this->price;
+        return $this->attributes['price'];
     }
 
-    public function getCreatedAt(): Date
+    public function getCreatedAtTimestamp(): Carbon
     {
-        return $this->created_at;
+        return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAtColumn(): Date
+    public function getUpdatedAtTimestamp(): Carbon
     {
-        return $this->updated_at;
+        return $this->attributes['updated_at'];
     }
 
     public function getSupplier(): int
     {
-        return $this->supplier_id;
+        return $this->attributes['supplier_id'];
     }
     /*
      *SETTERS
     */
     public function setDescription(string $description): void
     {
-        $this->description = $description;
+        $this->attributes['description'] = $description;
     }
 
     public function setCategory(string $category): void
     {
-        $this->category = $category;
+        $this->attributes['category'] = $category;
     }
 
-    public function setCreationDate(Date $creation_date): void
+    public function setCreatedAtTimestamp(Carbon $createdAt): void
     {
-        $this->creation_date = $creation_date;
+        $this->attributes['created_at'] = $createdAt;
     }
 
-    public function setQuimicDetails(string $quimic_details): void
+    public function setUpdatedAtTimestamp(Carbon $updatedAt): void
     {
-        $this->quimic_details = $quimic_details;
+        $this->attributes['created_at'] = $updatedAt;
+    }
+
+    public function setChemicalDetails(string $chemicalDetails): void
+    {
+        $this->attributes['chemical_details'] = $chemicalDetails;
     }
 
     public function setKeywords(string $keywords): void
     {
-        $this->keywords = $keywords;
+        $this->attributes['keywords'] = $keywords;
     }
 
     public function setPrice(int $price): void
     {
-        $this->price = $price;
+        $this->attributes['price'] = $price;
     }
 
     public function setSupplier(int $id): void
     {
-        $this->supplier_id = $id;
+        $this->attributes['supplier_id'] = $id;
     }
 
     /*
@@ -137,4 +143,10 @@ class Drug extends Model
     {
         return $this->belongsTo(Supplier::class);
     }
+
+    public function items()
+    {
+        return $this->belongsTo(Item::class);
+    }
 }
+
