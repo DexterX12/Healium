@@ -7,10 +7,10 @@
 			<div class="col">
 				<a href="#" class="text-decoration-none">
 					<div class="card h-100 shadow-sm">
-						<img src="{{ $drug['image'] }}" class="card-img-top" alt="{{ $drug['name'] }}" style="object-fit:cover;height:250px;">
+						<img src="/{{ $drug->getImage() }}" class="card-img-top" alt="{{ $drug->getName() }}" style="object-fit:cover;height:250px;">
 						<div class="card-body text-center">
 							<h5 class="card-title fw-semibold">{{ $drug->getName()}}</h5>
-							<span class="badge {{ $drug['badge_class'] }}">{{ $drug->getCategory() }}</span>
+							<span class="badge success">{{ $drug->getCategory() }}</span>
 							<div class="mt-2">
 								<span class="fw-bold text-success">${{ $drug->getPrice() }}</span>
 							</div>

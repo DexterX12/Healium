@@ -55,6 +55,11 @@ class Drug extends Model
         return $this->attributes['id'];
     }
 
+    public function getName(): string
+    {
+        return $this->attributes['name'];
+    }
+
     public function getDescription(): string
     {
         return $this->attributes['description'];
@@ -109,6 +114,11 @@ class Drug extends Model
     /*
      *SETTERS
     */
+
+    public function setName(string $name): void
+    {
+        $this->attributes['name'] = $name;
+    }
 
     public function setDescription(string $description): void
     {
