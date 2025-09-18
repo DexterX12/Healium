@@ -25,3 +25,12 @@ Route::get('supplier/show', 'App\Http\Controllers\SupplierController@show')
 
 Route::get('supplier/index', 'App\Http\Controllers\SupplierController@index')
     ->name('supplier.index');
+
+Route::get('admin/index', 'App\Http\Controllers\Admin\AdminHomeController@index')
+    ->name('admin.home.index');
+
+Route::get('admin/drug/index', 'App\Http\Controllers\Admin\AdminDrugController@index')
+    ->name('admin.drug.index');
+
+Route::get('admin/drug/show/{id}', 'App\Http\Controllers\Admin\AdminDrugController@index')
+    ->name('admin.drug.show');
