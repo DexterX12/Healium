@@ -28,7 +28,6 @@ class Order extends Model
 
     public static array $rules = [
         'user_id' => 'required|exists:users,id',
-        'date' => 'required|date',
         'description' => 'nullable|string|max:255',
     ];
 
@@ -42,16 +41,6 @@ class Order extends Model
     public function getUserId(): int
     {
         return $this->attributes['user_id'];
-    }
-
-    public function getDate(): Carbon
-    {
-        return Carbon::parse($this->attributes['date']);
-    }
-
-    public function getItems(): Collection
-    {
-        return $this->items;
     }
 
     public function getCreatedAtTimestamp(): Carbon
@@ -78,27 +67,7 @@ class Order extends Model
 
     /** OTHERS FUNCTIONS */
 
-    public function addItem(int $drugId, int $quantity, int $total): Item
-    {
-        return $this->items()->create([
-            'drug_id' => $drugId,
-            'quantity' => $quantity,
-            'total' => $total,
-        ]);
-    }
-
-    public function removeItem(int $itemId): void
-    {
-        $this->items()->where('id', $itemId)->delete();
-    }
-
-    public function updateItem(int $itemId, int $quantity, int $total): void
-    {
-        $this->items()->where('id', $itemId)->update([
-            'quantity' => $quantity,
-            'total' => $total,
-        ]);
-    }
+    
 
     /* 
     VALIDATIONS
