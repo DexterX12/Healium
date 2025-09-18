@@ -28,7 +28,7 @@ class DrugController extends Controller
         $selectedDrug = Drug::findOrFail($id);
         $viewData['drug'] = $selectedDrug;
 
-        return view('drug.view')->with('viewData', $viewData);
+        return view('drug.show')->with('viewData', $viewData);
     }
 
     public function save(Request $request): RedirectResponse

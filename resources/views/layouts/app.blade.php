@@ -6,25 +6,24 @@
     <title>Healium Drug Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="#">Healium</a>
+            <a class="navbar-brand fw-bold text-primary" href="{{route('home.index')}}">Healium</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{route('home.index')}}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('drug.index')}}">Products</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
 
-    <main class="container flex-grow-1">
+    <main class="container">
         @yield('content')
     </main>
 

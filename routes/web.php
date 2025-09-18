@@ -12,7 +12,7 @@ Route::get('drug/create', 'App\Http\Controllers\DrugController@create')
     ->name('drug.create');
 
 Route::get('drug/show/{id}', 'App\Http\Controllers\DrugController@show')
-    ->name('drug.view');
+    ->name('drug.show');
 
 Route::get('supplier/save', 'App\Http\Controllers\SupplierController@save')
     ->name('supplier.save');
