@@ -2,6 +2,23 @@
 @section('content')
 	<div class="container py-5">
 		<h1 class="mb-4 text-center fw-bold text-primary">Our Products</h1>
+		
+		<form method="GET" action="{{ route('drug.index') }}" class="row mb-4 justify-content-center">
+			<div class="col-md-4 mb-2 mb-md-0">
+				<input type="text" name="search" class="form-control" placeholder="Search drugs..." value="{{ request('search') }}">
+			</div>
+			<div class="col-md-3 mb-2 mb-md-0">
+				<select name="sales_filter" class="form-select">
+					<option value="">Filter by sales</option>
+					<option value="asc" {{ request('sales_filter') == 'asc' ? 'selected' : '' }}>Lowest sales</option>
+					<option value="desc" {{ request('sales_filter') == 'desc' ? 'selected' : '' }}>Highest sales</option>
+				</select>
+			</div>
+			<div class="col-md-2">
+				<button type="submit" class="btn btn-primary w-100">Apply</button>
+			</div>
+		</form>
+		
 		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
 			@foreach($viewData['drugs'] as $drug)
 			<div class="col">
@@ -13,6 +30,9 @@
 							<span class="badge text-bg-success">{{ $drug->getCategory() }}</span>
 							<div class="mt-2">
 								<span class="fw-bold">${{ $drug->getPrice() }} COP</span>
+								@if(method_exists($drug, 'getSalesAmount'))
+									<div class="text-muted small">Sales: {{ $drug->getSalesAmount() }}</div>
+								@endif
 							</div>
 						</div>
 					</div>

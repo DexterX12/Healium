@@ -50,4 +50,15 @@ class DrugController extends Controller
             ->route('drug.index')
             ->with('success', 'Drug deleted successfully');
     }
+
+    public function searchByName(Request $request): RedirectResponse
+    {
+        $searchName= $request->query('name');
+        $viewData = [];
+        $viewData['drugs'] = Drug::searchByName($searchName);
+
+        return redirect()
+            ->route('drug.index')
+            ->with('success', 'Drug has been found successfully');
+    }
 }
