@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Models\Supplier;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SupplierController extends Controller
 {
@@ -16,6 +16,7 @@ class SupplierController extends Controller
 
         return view('supplier.index')->with('viewData', $viewData);
     }
+
     public function save(Request $request): RedirectResponse
     {
         $dataSupplierValidated = Supplier::validate($request->all());
