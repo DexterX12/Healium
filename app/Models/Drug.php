@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\Item;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Collection;
 
 class Drug extends Model
 {
@@ -178,6 +179,9 @@ class Drug extends Model
         return validator($drugDataValidated, static::$rules)->validate();
     }
 
+    /*
+     * OTHER METHODS
+    */
     public function supplier(): BelongsTo
     {
         return $this->belongsTo(Supplier::class);
@@ -186,6 +190,11 @@ class Drug extends Model
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
+    }
+
+    public static function searchByName(string $name): Collection
+    {
+        return Drug::where('name', 'LIKE', '%' . $name . '%')->get();
     }
 }
 
