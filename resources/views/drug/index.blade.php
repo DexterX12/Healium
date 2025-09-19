@@ -5,7 +5,7 @@
 		
 		<form method="GET" action="{{ route('drug.index') }}" class="row mb-4 justify-content-center">
 			<div class="col-md-4 mb-2 mb-md-0">
-				<input type="text" name="search" class="form-control" placeholder="Search drugs..." value="{{ request('search') }}">
+				<input type="text" name="name" class="form-control" placeholder="Search drugs..." value="{{ request('name') }}">
 			</div>
 			<div class="col-md-3 mb-2 mb-md-0">
 				<select name="sales_filter" class="form-select">
