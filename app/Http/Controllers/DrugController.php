@@ -9,10 +9,19 @@ use Illuminate\View\View;
 
 class DrugController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
         $viewData = [];
-        $viewData['drugs'] = Drug::all();
+        $searchName = $request->query('name');
+        $salesFilter = $request->query('sales_filter');
+
+        if ($searchName) {
+            $viewData['drugs'] = Drug::searchByName($searchName);
+        } elseif ($salesFilter) {
+            $viewData['drugs'] = Drug::filterBySales($salesFilter);
+        } else {
+            $viewData['drugs'] = Drug::all();
+        }
 
         return view('drug.index')->with('viewData', $viewData);
     }
@@ -49,16 +58,5 @@ class DrugController extends Controller
         return redirect()
             ->route('drug.index')
             ->with('success', 'Drug deleted successfully');
-    }
-
-    public function searchByName(Request $request): RedirectResponse
-    {
-        $searchName= $request->query('name');
-        $viewData = [];
-        $viewData['drugs'] = Drug::searchByName($searchName);
-
-        return redirect()
-            ->route('drug.index')
-            ->with('success', 'Drug has been found successfully');
     }
 }
