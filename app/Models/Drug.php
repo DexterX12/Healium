@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use App\Models\Item;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Collection;
-
+use App\Models\Item;
 class Drug extends Model
 {
-
     /**
      * PRODUCT ATTRIBUTES
      * $this->attributes['id'] - int - contains the drug primary key (id)
@@ -25,10 +22,9 @@ class Drug extends Model
      * $this->attributes['price'] - int- contains the drug price
      * $this->attributes['created_at'] - timestamp - contains the drug creation date
      * $this->attributes['updated_at'] - timestamp - contains the drug update date
-     * $this->items - Item[] - contains the associated items 
+     * $this->items - Item[] - contains the associated items
      * $this->supplier - Supplier - contains the associated supplier
-    */
-
+     */
     protected $fillable = [
         'name',
         'supplier_id',
@@ -105,12 +101,11 @@ class Drug extends Model
     {
         return $this->attributes['img_path'];
     }
-    
+
     public function getSupplier(): Supplier
     {
         return $this->supplier;
     }
-
 
     /*
      *SETTERS
@@ -194,7 +189,17 @@ class Drug extends Model
 
     public static function searchByName(string $name): Collection
     {
-        return Drug::where('name', 'LIKE', '%' . $name . '%')->get();
+        return Drug::where('name', 'LIKE', '%'.$name.'%')->get();
+    }
+
+    public static function filterBySales(string $salesFilter): Collection
+    {
+        if ($salesFilter === 'asc' || $salesFilter === 'desc') {
+            return Drug::withSum('items as sales_amount', 'quantity')
+                ->orderBy('sales_amount', $salesFilter)
+                ->get();
+        }
+
+        return Drug::all();
     }
 }
-
