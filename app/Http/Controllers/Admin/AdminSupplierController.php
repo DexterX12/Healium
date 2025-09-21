@@ -43,12 +43,26 @@ class AdminSupplierController extends Controller
             ->with('success', 'Supplier deleted successfully');
     }
 
-    public function show(int $id): View
+    public function edit(int $id): View
     {
         $viewData = [];
         $selectedSupplier = Supplier::findOrFail($id);
         $viewData['supplier'] = $selectedSupplier;
 
-        return view('admin.supplier.show')->with('viewData', $viewData);
+        return view('admin.supplier.edit')->with('viewData', $viewData);
     }
+
+    public function update(Request $request): RedirectResponse
+    {
+        $dataSupplierValidated = Supplier::validate($request->all());
+        $supplierToUpdate = Supplier::findOrFail($request->all()['id']);
+        
+        $supplierToUpdate->fill($dataSupplierValidated);
+        $supplierToUpdate->save();
+
+        return redirect()
+            ->route('admin.supplier.index')
+            ->with('success', 'Supplier updated successfully');
+    }
+
 }

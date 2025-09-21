@@ -29,11 +29,17 @@ Route::put('admin/drug/save', 'App\Http\Controllers\Admin\AdminDrugController@sa
 Route::get('admin/supplier/index', 'App\Http\Controllers\Admin\AdminSupplierController@index')
     ->name('admin.supplier.index');
 
-Route::get('admin/supplier/show/{id}', 'App\Http\Controllers\Admin\AdminSupplierController@index')
-    ->name('admin.supplier.show');
+Route::get('admin/supplier/edit/{id}', 'App\Http\Controllers\Admin\AdminSupplierController@edit')
+    ->name('admin.supplier.edit');
 
 Route::get('admin/supplier/create', 'App\Http\Controllers\Admin\AdminSupplierController@create')
     ->name('admin.supplier.create');
 
-Route::put('admin/supplier/save', 'App\Http\Controllers\Admin\AdminSupplierController@save')
+Route::post('admin/supplier/save', 'App\Http\Controllers\Admin\AdminSupplierController@save')
     ->name('admin.supplier.save');
+
+Route::put('admin/supplier/update', 'App\Http\Controllers\Admin\AdminSupplierController@update')
+    ->name('admin.supplier.update');
+
+Route::delete('admin/supplier/delete', 'App\Http\Controllers\Admin\AdminSupplierController@delete')
+    ->name('admin.supplier.delete');
