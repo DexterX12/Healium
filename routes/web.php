@@ -27,13 +27,25 @@ Route::get('supplier/index', 'App\Http\Controllers\SupplierController@index')
     ->name('supplier.index');
 
 Route::get('order/index', 'App\Http\Controllers\OrderController@index')
-    ->name('order.index')
-    ->middleware('auth');
+    ->middleware('auth')
+    ->name('order.index');
 
 Route::post('order/save', 'App\Http\Controllers\OrderController@save')
-    ->name('order.save')
-    ->middleware('auth');
+    ->middleware('auth')
+    ->name('order.save');
 
 Route::get('order/show/{id}', 'App\Http\Controllers\OrderController@show')
-    ->name('order.show')
-    ->middleware('auth');
+    ->middleware('auth')
+    ->name('order.show');
+
+Route::get('cart/index', 'App\Http\Controllers\CartController@index')
+    ->middleware('auth')
+    ->name('cart.index');
+
+Route::post('cart/add/{id}', 'App\Http\Controllers\CartController@add')
+    ->middleware('auth')
+    ->name('cart.add');
+
+Route::delete('cart/removeAll', 'App\Http\Controllers\CartController@removeAll')
+    ->middleware('auth')
+    ->name('cart.removeAll');

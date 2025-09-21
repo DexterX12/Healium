@@ -18,6 +18,9 @@
                     <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">
+                        <i class="bi bi-cart"></i> Cart
+                    </a>
                 </ul>
             </div>
         </div>
