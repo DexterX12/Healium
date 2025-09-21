@@ -62,6 +62,18 @@ Route::get('order/show/{id}', 'App\Http\Controllers\OrderController@show')
     ->middleware('auth')
     ->name('order.show');
 
+Route::get('cart/index', 'App\Http\Controllers\CartController@index')
+    ->middleware('auth')
+    ->name('cart.index');
+
+Route::post('cart/add/{id}', 'App\Http\Controllers\CartController@add')
+    ->middleware('auth')
+    ->name('cart.add');
+
+Route::delete('cart/removeAll', 'App\Http\Controllers\CartController@removeAll')
+    ->middleware('auth')
+    ->name('cart.removeAll');
+
 Route::post('comment/save', 'App\Http\Controllers\CommentController@save')
     ->middleware('auth')
     ->name('comment.save');
