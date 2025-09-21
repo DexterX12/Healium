@@ -23,7 +23,7 @@
                         <a class="nav-link" href="{{ route('admin.drug.index') }}">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Suppliers</a>
+                        <a class="nav-link" href="{{ route('admin.supplier.index') }}">Suppliers</a>
                     </li>
                 </ul>
             </div>
@@ -43,7 +43,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-        
+
         @yield('content')
     </div>
     <!-- Bootstrap JS Bundle CDN -->

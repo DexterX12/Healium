@@ -11,18 +11,6 @@ Route::get('drug/index', 'App\Http\Controllers\DrugController@index')
 Route::get('drug/show/{id}', 'App\Http\Controllers\DrugController@show')
     ->name('drug.show');
 
-Route::get('supplier/save', 'App\Http\Controllers\SupplierController@save')
-    ->name('supplier.save');
-
-Route::get('supplier/create', 'App\Http\Controllers\SupplierController@create')
-    ->name('supplier.create');
-
-Route::get('supplier/show', 'App\Http\Controllers\SupplierController@show')
-    ->name('supplier.show/{id}');
-
-Route::get('supplier/index', 'App\Http\Controllers\SupplierController@index')
-    ->name('supplier.index');
-
 Route::get('admin/index', 'App\Http\Controllers\Admin\AdminHomeController@index')
     ->name('admin.home.index');
 
@@ -37,3 +25,15 @@ Route::get('admin/drug/create', 'App\Http\Controllers\Admin\AdminDrugController@
 
 Route::put('admin/drug/save', 'App\Http\Controllers\Admin\AdminDrugController@save')
     ->name('admin.drug.save');
+
+Route::get('admin/supplier/index', 'App\Http\Controllers\Admin\AdminSupplierController@index')
+    ->name('admin.supplier.index');
+
+Route::get('admin/supplier/show/{id}', 'App\Http\Controllers\Admin\AdminSupplierController@index')
+    ->name('admin.supplier.show');
+
+Route::get('admin/supplier/create', 'App\Http\Controllers\Admin\AdminSupplierController@create')
+    ->name('admin.supplier.create');
+
+Route::put('admin/supplier/save', 'App\Http\Controllers\Admin\AdminSupplierController@save')
+    ->name('admin.supplier.save');

@@ -80,6 +80,4 @@ class AdminDrugController extends Controller
             ->with('success', 'Drug deleted successfully.');
     }
 
-
-
 }

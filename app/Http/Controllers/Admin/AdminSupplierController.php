@@ -1,20 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Supplier;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class SupplierController extends Controller
+class AdminSupplierController extends Controller
 {
     public function index(): View
     {
         $viewData = [];
         $viewData['suppliers'] = Supplier::all();
 
-        return view('supplier.index')->with('viewData', $viewData);
+        return view('admin.supplier.index')->with('viewData', $viewData);
+    }
+
+    public function create(): View
+    {
+        return view('admin.supplier.create');
     }
 
     public function save(Request $request): RedirectResponse
@@ -23,7 +29,7 @@ class SupplierController extends Controller
         Supplier::create($dataSupplierValidated);
 
         return redirect()
-            ->route('supplier.save')
+            ->route('admin.supplier.index')
             ->with('success', 'Supplier created successfully');
     }
 
@@ -33,7 +39,7 @@ class SupplierController extends Controller
         $supplier->delete();
 
         return redirect()
-            ->route('supplier.index')
+            ->route('admin.supplier.index')
             ->with('success', 'Supplier deleted successfully');
     }
 
@@ -43,6 +49,6 @@ class SupplierController extends Controller
         $selectedSupplier = Supplier::findOrFail($id);
         $viewData['supplier'] = $selectedSupplier;
 
-        return view('supplier.show')->with('viewData', $viewData);
+        return view('admin.supplier.show')->with('viewData', $viewData);
     }
 }
