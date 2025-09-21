@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Item;
-use App\Models\User;
+namespace App\Models;
+
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,8 +21,7 @@ class Order extends Model
      * RELATIONSHIPS
      * $this->user - User - the user who created the order (N:1)
      * $this->items - Item[] - the list of items belonging to the order (1:N)
-    **/
-
+     **/
     public static array $rules = [
         'user_id' => 'required|exists:users,id',
         'description' => 'nullable|string|max:255',
@@ -74,7 +73,6 @@ class Order extends Model
         $this->attributes['description'] = $description;
     }
 
-
     public function setPayment(string $payment): void
     {
         $this->attributes['payment'] = $payment;
@@ -101,5 +99,4 @@ class Order extends Model
     {
         return $this->hasMany(Item::class);
     }
-
 }

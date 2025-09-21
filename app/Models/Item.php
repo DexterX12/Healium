@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Drug;
-use App\Models\Order;
+namespace App\Models;
+
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

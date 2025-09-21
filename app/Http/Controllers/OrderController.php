@@ -14,7 +14,6 @@ class OrderController extends Controller
         $viewData = [];
         $viewData['orders'] = Order::where('user_id', auth()->id())->get();
 
-
         return view('order.index')->with('viewData', $viewData);
     }
 
@@ -22,7 +21,7 @@ class OrderController extends Controller
     {
         $viewData = [];
         $selectedOrder = Order::where('user_id', auth()->id())->find($id);
-        if (!$selectedOrder){
+        if (! $selectedOrder) {
             return back()->with('error', 'Order not found');
         }
         $viewData['order'] = $selectedOrder;
@@ -41,5 +40,4 @@ class OrderController extends Controller
 
         return back()->with('success', 'Order generated successfully');
     }
-
 }

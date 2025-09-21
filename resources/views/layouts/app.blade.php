@@ -15,8 +15,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ route('home.index') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('drug.index') }}">Products</a></li>
                     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">
                         <i class="bi bi-cart"></i> Cart
                     </a>

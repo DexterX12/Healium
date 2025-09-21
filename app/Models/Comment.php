@@ -2,11 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Drug;
-use App\Models\User;
-
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Comment extends Model
@@ -16,15 +12,13 @@ class Comment extends Model
      * $this->attributes['id'] - int - contains the product primary key (id)
      * $this->attributes['drug_id'] - int - contains the drug id associated to the comment
      * $this->attributes['user_id'] - int - contains the user id associated to the comment
-     * 
+     *
      * $this->attributes['description'] - string - contains the comment description
-     * 
+     *
      * RELATIONSHIPS
      * $this->drug - Drug - contains the associated Drug
      * $this->user - User - contains the associated user
-     * 
      */
-
     protected $fillable = ['description', 'drug_id', 'user_id'];
 
     public static array $rules = [
@@ -33,7 +27,6 @@ class Comment extends Model
     ];
 
     /** GETTERS */
-
     public function getId(): int
     {
         return $this->attributes['id'];
@@ -54,7 +47,6 @@ class Comment extends Model
         return $this->attributes['drug_id'];
     }
 
-
     /**SETTERS */
 
     public function setDescription(string $desc): void
@@ -73,7 +65,6 @@ class Comment extends Model
     }
 
     /** RELATIONSHIPS */
-
     public function drug(): BelongsTo
     {
         return $this->belongsTo(Drug::class);
@@ -89,5 +80,4 @@ class Comment extends Model
     {
         return validator($commentData, static::$rules)->validate();
     }
-
 }

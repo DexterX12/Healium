@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Models\Item;
 
 class CartController extends Controller
 {
@@ -23,7 +23,7 @@ class CartController extends Controller
     public function add(string $itemId, Request $request): RedirectResponse
     {
         $cartItemData = $request->session()->get('cart_item_data', []);
-        if (!in_array($itemId, $cartItemData)) {
+        if (! in_array($itemId, $cartItemData)) {
             $cartItemData[] = $itemId;
         }
         $request->session()->put('cart_item_data', $cartItemData);

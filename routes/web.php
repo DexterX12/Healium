@@ -78,8 +78,6 @@ Route::post('comment/save', 'App\Http\Controllers\CommentController@save')
     ->middleware('auth')
     ->name('comment.save');
 
-    Route::delete('order/delete/{id}', 'App\Http\Controllers\OrderController@save')
+Route::delete('order/delete/{id}', 'App\Http\Controllers\OrderController@save')
     ->middleware('auth')
     ->name('order.delete');
-    ->name('order.show')
-    ->middleware('auth');
