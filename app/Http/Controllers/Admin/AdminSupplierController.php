@@ -35,6 +35,7 @@ class AdminSupplierController extends Controller
 
     public function delete(int $id): RedirectResponse
     {
+        dd($id);
         $supplier = Supplier::findOrFail($id);
         $supplier->delete();
 
@@ -55,7 +56,7 @@ class AdminSupplierController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $dataSupplierValidated = Supplier::validate($request->all());
-        $supplierToUpdate = Supplier::findOrFail($request->all()['id']);
+        $supplierToUpdate = Supplier::findOrFail($request->input('id'));
         
         $supplierToUpdate->fill($dataSupplierValidated);
         $supplierToUpdate->save();
