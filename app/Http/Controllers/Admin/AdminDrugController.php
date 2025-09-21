@@ -21,13 +21,16 @@ class AdminDrugController extends Controller
         return view('admin.drug.index')->with('viewData', $viewData);
     }
 
-    public function show(int $id): View
+    public function edit(int $id): View
     {
         $viewData = [];
-        $selectedDrug = Drug::findOrFail($id);
-        $viewData['drug'] = $selectedDrug;
 
-        return view('admin.drug.show')->with('viewData', $viewData);
+        $selectedDrug = Drug::findOrFail($id);
+        $suppliers = Supplier::all();
+        $viewData['drug'] = $selectedDrug;
+        $viewData['suppliers'] = $suppliers;
+
+        return view('admin.drug.edit')->with('viewData', $viewData);
     }
 
     public function create(): View | RedirectResponse
@@ -64,6 +67,31 @@ class AdminDrugController extends Controller
             $newDrug->setImage($imageName);
             $newDrug->save();
         }
+
+        return redirect()
+            ->route('admin.drug.index')
+            ->with('success', 'Drug created successfully.');
+    }
+
+    public function update(Request $request): RedirectResponse
+    {
+        $drugDataValidated = Drug::validate($request->all());
+        $drugToUpdate = Drug::findOrFail($request->input('id'));
+        $drugToUpdate->fill($drugDataValidated);
+
+        if ($request->hasFile('image'))
+        {
+            $imageName = $drugToUpdate->getId().".".$request->file('image')->extension();
+            
+            Storage::disk('public')->put(
+                $imageName,
+                file_get_contents($request->file('image')->getRealPath())
+            );
+
+            $drugToUpdate->setImage($imageName);
+        }
+        
+        $drugToUpdate->save();
 
         return redirect()
             ->route('admin.drug.index')

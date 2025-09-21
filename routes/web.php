@@ -17,14 +17,20 @@ Route::get('admin/index', 'App\Http\Controllers\Admin\AdminHomeController@index'
 Route::get('admin/drug/index', 'App\Http\Controllers\Admin\AdminDrugController@index')
     ->name('admin.drug.index');
 
-Route::get('admin/drug/show/{id}', 'App\Http\Controllers\Admin\AdminDrugController@index')
-    ->name('admin.drug.show');
+Route::get('admin/drug/edit/{id}', 'App\Http\Controllers\Admin\AdminDrugController@edit')
+    ->name('admin.drug.edit');
 
 Route::get('admin/drug/create', 'App\Http\Controllers\Admin\AdminDrugController@create')
     ->name('admin.drug.create');
 
 Route::post('admin/drug/save', 'App\Http\Controllers\Admin\AdminDrugController@save')
     ->name('admin.drug.save');
+
+Route::put('admin/drug/update', 'App\Http\Controllers\Admin\AdminDrugController@update')
+    ->name('admin.drug.update');
+
+Route::delete('admin/drug/delete', 'App\Http\Controllers\Admin\AdminDrugController@delete')
+    ->name('admin.drug.delete');
 
 Route::get('admin/supplier/index', 'App\Http\Controllers\Admin\AdminSupplierController@index')
     ->name('admin.supplier.index');

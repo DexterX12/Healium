@@ -8,12 +8,20 @@
 </div>
 <div class="list-group">
     @foreach($viewData['drugs'] as $drug)
-        <a href="{{ route('admin.drug.show', ['id' => $drug->getId()]) }}" class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
                 <h5 class="mb-1">{{ $drug->getName() }}</h5>
                 <small class="text-muted">${{ number_format($drug->getPrice(), 2) }}</small>
             </div>
-        </a>
+            <div>
+                <a href="{{ route('admin.drug.edit', ['id' => $drug->getId()]) }}" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+                <form action="{{ route('admin.drug.delete', ['id' => $drug->getId()]) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this drug?')">Delete</button>
+                </form>
+            </div>
+        </div>
     @endforeach
 </div>
 @endsection
