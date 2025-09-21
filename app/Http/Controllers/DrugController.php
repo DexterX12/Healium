@@ -26,11 +26,6 @@ class DrugController extends Controller
         return view('drug.index')->with('viewData', $viewData);
     }
 
-    public function create(): View
-    {
-        return view('drug.create');
-    }
-
     public function show(int $id): View
     {
         $viewData = [];
@@ -38,25 +33,5 @@ class DrugController extends Controller
         $viewData['drug'] = $selectedDrug;
 
         return view('drug.show')->with('viewData', $viewData);
-    }
-
-    public function save(Request $request): RedirectResponse
-    {
-        $drugDataValidated = $request->validate($request->all());
-        Drug::create($drugDataValidated);
-
-        return redirect()
-            ->route('drug.index')
-            ->with('success', 'Drug created successfully');
-    }
-
-    public function delete(int $id): RedirectResponse
-    {
-        $drug = Drug::findOrFail($id);
-        $drug->delete();
-
-        return redirect()
-            ->route('drug.index')
-            ->with('success', 'Drug deleted successfully');
     }
 }

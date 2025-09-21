@@ -11,7 +11,7 @@ class HomeController extends Controller
     {
 
         $viewData = [];
-        $viewData['drugs'] = Drug::orderBy('created_at')->get();
+        $viewData['drugs'] = Drug::orderBy('created_at', 'desc')->get();
 
         return view('home.index')->with('viewData', $viewData);
     }

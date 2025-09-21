@@ -8,9 +8,6 @@ Route::get('/', 'App\Http\Controllers\HomeController@index')
 Route::get('drug/index', 'App\Http\Controllers\DrugController@index')
     ->name('drug.index');
 
-Route::get('drug/create', 'App\Http\Controllers\DrugController@create')
-    ->name('drug.create');
-
 Route::get('drug/show/{id}', 'App\Http\Controllers\DrugController@show')
     ->name('drug.show');
 
@@ -34,3 +31,9 @@ Route::get('admin/drug/index', 'App\Http\Controllers\Admin\AdminDrugController@i
 
 Route::get('admin/drug/show/{id}', 'App\Http\Controllers\Admin\AdminDrugController@index')
     ->name('admin.drug.show');
+
+Route::get('admin/drug/create', 'App\Http\Controllers\Admin\AdminDrugController@create')
+    ->name('admin.drug.create');
+
+Route::put('admin/drug/save', 'App\Http\Controllers\Admin\AdminDrugController@save')
+    ->name('admin.drug.save');

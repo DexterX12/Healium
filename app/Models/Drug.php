@@ -41,6 +41,7 @@ class Drug extends Model
         'description' => 'required|string|max:255',
         'category' => 'required|string|max:60',
         'chemical_details' => 'required|string|max:255',
+        'keywords' => 'required|string|max:255',
         'price' => 'required|numeric|min:0',
     ];
 
