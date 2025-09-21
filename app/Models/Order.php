@@ -1,13 +1,11 @@
 <?php
 
-
-use App\Models\User;
 use App\Models\Item;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Collection;
-use Carbon\Carbon;
 
 class Order extends Model
 {
@@ -16,19 +14,20 @@ class Order extends Model
      * $this->attributes['id'] - int - contains the item primary key (id)
      * $this->attributes['user_id'] - int - contains the id of the user who created the order
      * $this->attirbutes['description'] - string - contains the order details, if applicable
+     * $this->attirbutes['payment'] - string - contains the payment method used in the order
      * $this->attributes['created_at'] - timestamp - contains the order creation date
      * $this->attributes['updated_at'] - timestamp - contains the order update date
-     * 
+     *
      * RELATIONSHIPS
      * $this->user - User - the user who created the order (N:1)
      * $this->items - Item[] - the list of items belonging to the order (1:N)
-     * $this->payment - Payment  - the payment method associated with the order (N:1)
     **/
-
 
     public static array $rules = [
         'user_id' => 'required|exists:users,id',
         'description' => 'nullable|string|max:255',
+        'payment' => 'string|max:50',
+
     ];
 
     /* GETTERS */
@@ -53,6 +52,16 @@ class Order extends Model
         return $this->attributes['updated_at'];
     }
 
+    public function getDescription(): string
+    {
+        return $this->attributes['description'];
+    }
+
+    public function getPayment(): string
+    {
+        return $this->attributes['payment'];
+    }
+
     /* SETTERS */
 
     public function setUserId(int $userId): void
@@ -65,11 +74,17 @@ class Order extends Model
         $this->attributes['description'] = $description;
     }
 
+
+    public function setPayment(string $payment): void
+    {
+        $this->attributes['payment'] = $payment;
+    }
+
     /** OTHERS FUNCTIONS */
 
-    
-
-    /*VALIDATIONS*/
+    /*
+    VALIDATIONS
+    */
 
     public static function validate(array $orderData): array
     {
@@ -77,7 +92,6 @@ class Order extends Model
     }
 
     /** RELATIONSHIPS*/
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -88,8 +102,4 @@ class Order extends Model
         return $this->hasMany(Item::class);
     }
 
-    public function payment(): BelongsTo
-    {
-        return $this->belongsTo(Payment::class);
-    }
 }

@@ -2,18 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+
 use App\Models\Item;
 use App\Models\Comment;
 use App\Models\Supplier;
+
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Drug extends Model
 {
-
     /**
      * PRODUCT ATTRIBUTES
      * $this->attributes['id'] - int - contains the drug primary key (id)
@@ -26,7 +28,7 @@ class Drug extends Model
      * $this->attributes['price'] - int- contains the drug price
      * $this->attributes['created_at'] - timestamp - contains the drug creation date
      * $this->attributes['updated_at'] - timestamp - contains the drug update date
-     * $this->items - Item[] - contains the associated items 
+     * $this->items - Item[] - contains the associated items
      * $this->supplier - Supplier - contains the associated supplier
      * $this->comments - Comment - contains the associated comments
      * 
@@ -48,6 +50,7 @@ class Drug extends Model
         'description' => 'required|string|max:255',
         'category' => 'required|string|max:60',
         'chemical_details' => 'required|string|max:255',
+        'keywords' => 'required|string|max:255',
         'price' => 'required|numeric|min:0',
     ];
 
@@ -57,6 +60,11 @@ class Drug extends Model
     public function getId(): int
     {
         return $this->attributes['id'];
+    }
+
+    public function getName(): string
+    {
+        return $this->attributes['name'];
     }
 
     public function getDescription(): string
@@ -103,16 +111,20 @@ class Drug extends Model
     {
         return $this->attributes['img_path'];
     }
-    
+
     public function getSupplier(): Supplier
     {
         return $this->supplier;
     }
 
-
     /*
      *SETTERS
     */
+
+    public function setName(string $name): void
+    {
+        $this->attributes['name'] = $name;
+    }
 
     public function setDescription(string $description): void
     {
@@ -172,7 +184,9 @@ class Drug extends Model
         return validator($drugDataValidated, static::$rules)->validate();
     }
 
+ 
     /**RELATIONSHIPS */
+
     public function supplier(): BelongsTo
     {
         return $this->belongsTo(Supplier::class);
@@ -183,6 +197,7 @@ class Drug extends Model
         return $this->hasMany(Item::class);
     }
 
+
     public function comments(): HasMany
     {
 
@@ -191,3 +206,19 @@ class Drug extends Model
     }
 }
 
+    public static function searchByName(string $name): Collection
+    {
+        return Drug::where('name', 'LIKE', '%'.$name.'%')->get();
+    }
+
+    public static function filterBySales(string $salesFilter): Collection
+    {
+        if ($salesFilter === 'asc' || $salesFilter === 'desc') {
+            return Drug::withSum('items as sales_amount', 'quantity')
+                ->orderBy('sales_amount', $salesFilter)
+                ->get();
+        }
+
+        return Drug::all();
+    }
+}

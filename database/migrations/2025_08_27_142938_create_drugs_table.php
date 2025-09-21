@@ -14,14 +14,17 @@ return new class extends Migration
         Schema::create('drugs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('img_path');
+            $table->string('img_path')->nullable();
             $table->unsignedBigInteger('supplier_id');
             $table->string('description');
             $table->string('category');
             $table->string('chemical_details');
             $table->string('keywords');
             $table->integer('price');
-            $table->foreign('supplier_id')->references('id')->on('suppliers');
+            $table->foreign('supplier_id')
+                ->references('id')
+                ->on('suppliers')
+                ->onDelete('strict');
             $table->timestamps();
         });
     }
