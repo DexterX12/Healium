@@ -49,3 +49,15 @@ Route::put('admin/supplier/update', 'App\Http\Controllers\Admin\AdminSupplierCon
 
 Route::delete('admin/supplier/delete', 'App\Http\Controllers\Admin\AdminSupplierController@delete')
     ->name('admin.supplier.delete');
+
+Route::get('order/index', 'App\Http\Controllers\OrderController@index')
+    ->name('order.index')
+    ->middleware('auth');
+
+Route::post('order/save', 'App\Http\Controllers\OrderController@save')
+    ->name('order.save')
+    ->middleware('auth');
+
+Route::get('order/show/{id}', 'App\Http\Controllers\OrderController@show')
+    ->name('order.show')
+    ->middleware('auth');
