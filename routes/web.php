@@ -23,7 +23,7 @@ Route::get('admin/drug/show/{id}', 'App\Http\Controllers\Admin\AdminDrugControll
 Route::get('admin/drug/create', 'App\Http\Controllers\Admin\AdminDrugController@create')
     ->name('admin.drug.create');
 
-Route::put('admin/drug/save', 'App\Http\Controllers\Admin\AdminDrugController@save')
+Route::post('admin/drug/save', 'App\Http\Controllers\Admin\AdminDrugController@save')
     ->name('admin.drug.save');
 
 Route::get('admin/supplier/index', 'App\Http\Controllers\Admin\AdminSupplierController@index')

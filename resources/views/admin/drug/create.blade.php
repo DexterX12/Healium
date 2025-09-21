@@ -4,7 +4,6 @@
     <h2>Create Drug</h2>
     <form action="{{ route('admin.drug.save') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
         <div class="mb-3">
             <label for="name" class="form-label">Drug Name</label>
             <input type="text" class="form-control" id="name" name="name" required>

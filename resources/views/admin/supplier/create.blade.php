@@ -5,7 +5,6 @@
     <h2>Create Supplier</h2>
     <form action="{{ route('admin.supplier.save') }}" method="POST">
         @csrf
-        @method('PUT')
         <div class="mb-3">
             <label for="name" class="form-label">Supplier Name</label>
             <input type="text" class="form-control" id="name" name="name" required>

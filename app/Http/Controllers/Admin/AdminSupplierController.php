@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Supplier;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -33,11 +34,23 @@ class AdminSupplierController extends Controller
             ->with('success', 'Supplier created successfully');
     }
 
-    public function delete(int $id): RedirectResponse
+    public function delete(Request $request): RedirectResponse
     {
-        dd($id);
-        $supplier = Supplier::findOrFail($id);
-        $supplier->delete();
+        try
+        {
+            $supplier = Supplier::findOrFail($request->input('id'));
+            $supplier->delete();
+        } catch (QueryException $exception)
+        {
+            if ($exception->getCode() === '23000')
+            {
+                return redirect()
+                    ->route('admin.supplier.index')
+                    ->with('error', 'This supplier has drugs related to it.');
+            }
+
+            throw $exception;
+        }
 
         return redirect()
             ->route('admin.supplier.index')
