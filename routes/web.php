@@ -25,3 +25,15 @@ Route::get('supplier/show', 'App\Http\Controllers\SupplierController@show')
 
 Route::get('supplier/index', 'App\Http\Controllers\SupplierController@index')
     ->name('supplier.index');
+
+Route::get('order/index', 'App\Http\Controllers\OrderController@index')
+    ->name('order.index')
+    ->middleware('auth');
+
+Route::post('order/save', 'App\Http\Controllers\OrderController@save')
+    ->name('order.save')
+    ->middleware('auth');
+
+Route::get('order/show/{id}', 'App\Http\Controllers\OrderController@show')
+    ->name('order.show')
+    ->middleware('auth');
