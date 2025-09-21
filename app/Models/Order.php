@@ -14,15 +14,16 @@ class Order extends Model
     /**
      * Order ATTRIBUTES
      * $this->attributes['id'] - int - contains the item primary key (id)
-     * $this->attributes['use_id'] - int - contains the id of the user who created the order
+     * $this->attributes['user_id'] - int - contains the id of the user who created the order
      * $this->attributes['date'] - timestamp - contains the date and the time of the order creation
      * $this->attirbutes['description'] - string - contains the order details, if applicable
      * $this->attributes['created_at'] - timestamp - contains the order creation date
      * $this->attributes['updated_at'] - timestamp - contains the order update date
      * 
      * RELATIONSHIPS
-     * $this->user   - User   - the user who created the order (N:1)
-     * $this->items  - Item[] - the list of items belonging to the order (1:N)
+     * $this->user - User - the user who created the order (N:1)
+     * $this->items - Item[] - the list of items belonging to the order (1:N)
+     * $this->payment - Payment  - the payment method associated with the order (N:1)
     **/
 
 
@@ -69,9 +70,7 @@ class Order extends Model
 
     
 
-    /* 
-    VALIDATIONS
-    */
+    /*VALIDATIONS*/
 
     public static function validate(array $orderData): array
     {
@@ -88,5 +87,10 @@ class Order extends Model
     public function items(): HasMany
     {
         return $this->hasMany(Item::class);
+    }
+
+    public function payment(): BelongsTo
+    {
+        return $this->belongsTo(Payment::class);
     }
 }
