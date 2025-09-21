@@ -21,7 +21,10 @@ return new class extends Migration
             $table->string('chemical_details');
             $table->string('keywords');
             $table->integer('price');
-            $table->foreign('supplier_id')->references('id')->on('suppliers');
+            $table->foreign('supplier_id')
+                  ->references('id')
+                  ->on('suppliers')
+                  ->onDelete('strict');
             $table->timestamps();
         });
     }
