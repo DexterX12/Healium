@@ -51,13 +51,23 @@ Route::delete('admin/supplier/delete', 'App\Http\Controllers\Admin\AdminSupplier
     ->name('admin.supplier.delete');
 
 Route::get('order/index', 'App\Http\Controllers\OrderController@index')
-    ->name('order.index')
-    ->middleware('auth');
+    ->middleware('auth')
+    ->name('order.index');
 
 Route::post('order/save', 'App\Http\Controllers\OrderController@save')
-    ->name('order.save')
-    ->middleware('auth');
+    ->middleware('auth')
+    ->name('order.save');
 
 Route::get('order/show/{id}', 'App\Http\Controllers\OrderController@show')
+    ->middleware('auth')
+    ->name('order.show');
+
+Route::post('comment/save', 'App\Http\Controllers\CommentController@save')
+    ->middleware('auth')
+    ->name('comment.save');
+
+    Route::delete('order/delete/{id}', 'App\Http\Controllers\OrderController@save')
+    ->middleware('auth')
+    ->name('order.delete');
     ->name('order.show')
     ->middleware('auth');

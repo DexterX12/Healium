@@ -3,8 +3,14 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+
+use App\Models\Item;
+use App\Models\Comment;
+use App\Models\Supplier;
+
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -24,7 +30,10 @@ class Drug extends Model
      * $this->attributes['updated_at'] - timestamp - contains the drug update date
      * $this->items - Item[] - contains the associated items
      * $this->supplier - Supplier - contains the associated supplier
-     */
+     * $this->comments - Comment - contains the associated comments
+     * 
+    */
+
     protected $fillable = [
         'name',
         'supplier_id',
@@ -175,9 +184,9 @@ class Drug extends Model
         return validator($drugDataValidated, static::$rules)->validate();
     }
 
-    /*
-     * OTHER METHODS
-    */
+ 
+    /**RELATIONSHIPS */
+
     public function supplier(): BelongsTo
     {
         return $this->belongsTo(Supplier::class);
@@ -187,6 +196,15 @@ class Drug extends Model
     {
         return $this->hasMany(Item::class);
     }
+
+
+    public function comments(): HasMany
+    {
+
+    return $this->hasMany(Comment::class);
+
+    }
+}
 
     public static function searchByName(string $name): Collection
     {
