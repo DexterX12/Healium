@@ -6,32 +6,49 @@
     <title>Healium Drug Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="#">Healium</a>
+            <a class="navbar-brand fw-bold text-primary" href="{{route('home.index')}}">Healium</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{route('home.index')}}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('drug.index')}}">Products</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
 
-    <main class="container flex-grow-1">
+    <main class="container">
         @yield('content')
     </main>
 
 
-    <footer class="bg-white border-top py-4 mt-auto">
-        <div class="container text-center text-secondary">
-            &copy; {{ date('Y') }} Healium Drug Store. All rights reserved.
+    <footer class="bg-primary text-white mt-5 pt-4 pb-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <h5 class="fw-bold mb-1">Healium Pharmacy</h5>
+                    <p class="mb-0 small">
+                        Quality medicines, caring for your health.<br>
+                        <i class="bi bi-geo-alt"></i> Bogotá, Colombia
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <span class="me-2">Follow us:</span>
+                    <a href="#" class="text-white me-2"><i class="bi bi-facebook fs-5"></i></a>
+                    <a href="#" class="text-white me-2"><i class="bi bi-instagram fs-5"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-twitter fs-5"></i></a>
+                </div>
+            </div>
+            <hr class="border-light my-3">
+            <div class="text-center small">
+                &copy; {{ date('Y') }} Healium Pharmacy. All rights reserved.
+            </div>
         </div>
     </footer>
 

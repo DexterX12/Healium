@@ -1,13 +1,11 @@
 <?php
 
-
-use App\Models\User;
 use App\Models\Item;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Collection;
-use Carbon\Carbon;
 
 class Order extends Model
 {
@@ -19,12 +17,11 @@ class Order extends Model
      * $this->attirbutes['payment'] - string - contains the payment method used in the order
      * $this->attributes['created_at'] - timestamp - contains the order creation date
      * $this->attributes['updated_at'] - timestamp - contains the order update date
-     * 
+     *
      * RELATIONSHIPS
      * $this->user - User - the user who created the order (N:1)
      * $this->items - Item[] - the list of items belonging to the order (1:N)
     **/
-
 
     public static array $rules = [
         'user_id' => 'required|exists:users,id',
@@ -85,9 +82,9 @@ class Order extends Model
 
     /** OTHERS FUNCTIONS */
 
-    
-
-    /*VALIDATIONS*/
+    /*
+    VALIDATIONS
+    */
 
     public static function validate(array $orderData): array
     {
@@ -95,7 +92,6 @@ class Order extends Model
     }
 
     /** RELATIONSHIPS*/
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
