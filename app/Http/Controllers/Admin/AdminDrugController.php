@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Drug;
-
+use App\Models\Supplier;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Supplier;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class AdminDrugController extends Controller
 {
@@ -33,19 +32,17 @@ class AdminDrugController extends Controller
         return view('admin.drug.edit')->with('viewData', $viewData);
     }
 
-    public function create(): View | RedirectResponse
+    public function create(): View|RedirectResponse
     {
         $viewData = [];
         $suppliers = Supplier::all();
         $viewData['suppliers'] = $suppliers;
 
-        if ($suppliers->count() < 1)
-        {
+        if ($suppliers->count() < 1) {
             return redirect()
                 ->route('admin.drug.index')
                 ->with('error', 'There are no suppliers stored. Please add suppliers before creating a new drug.');
         }
-        
 
         return view('admin.drug.create')->with('viewData', $viewData);
     }
@@ -55,10 +52,9 @@ class AdminDrugController extends Controller
         $drugDataValidated = Drug::validate($request->all());
         $newDrug = Drug::create($drugDataValidated);
 
-        if ($request->hasFile('image'))
-        {
-            $imageName = $newDrug->getId().".".$request->file('image')->extension();
-            
+        if ($request->hasFile('image')) {
+            $imageName = $newDrug->getId().'.'.$request->file('image')->extension();
+
             Storage::disk('public')->put(
                 $imageName,
                 file_get_contents($request->file('image')->getRealPath())
@@ -79,10 +75,9 @@ class AdminDrugController extends Controller
         $drugToUpdate = Drug::findOrFail($request->input('id'));
         $drugToUpdate->fill($drugDataValidated);
 
-        if ($request->hasFile('image'))
-        {
-            $imageName = $drugToUpdate->getId().".".$request->file('image')->extension();
-            
+        if ($request->hasFile('image')) {
+            $imageName = $drugToUpdate->getId().'.'.$request->file('image')->extension();
+
             Storage::disk('public')->put(
                 $imageName,
                 file_get_contents($request->file('image')->getRealPath())
@@ -90,7 +85,7 @@ class AdminDrugController extends Controller
 
             $drugToUpdate->setImage($imageName);
         }
-        
+
         $drugToUpdate->save();
 
         return redirect()
@@ -107,5 +102,4 @@ class AdminDrugController extends Controller
             ->route('drug.index')
             ->with('success', 'Drug deleted successfully.');
     }
-
 }

@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('keywords');
             $table->integer('price');
             $table->foreign('supplier_id')
-                  ->references('id')
-                  ->on('suppliers')
-                  ->onDelete('strict');
+                ->references('id')
+                ->on('suppliers')
+                ->onDelete('strict');
             $table->timestamps();
         });
     }

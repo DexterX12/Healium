@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Supplier;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
+use App\Models\Supplier;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -36,14 +36,11 @@ class AdminSupplierController extends Controller
 
     public function delete(Request $request): RedirectResponse
     {
-        try
-        {
+        try {
             $supplier = Supplier::findOrFail($request->input('id'));
             $supplier->delete();
-        } catch (QueryException $exception)
-        {
-            if ($exception->getCode() === '23000')
-            {
+        } catch (QueryException $exception) {
+            if ($exception->getCode() === '23000') {
                 return redirect()
                     ->route('admin.supplier.index')
                     ->with('error', 'This supplier has drugs related to it.');
@@ -70,7 +67,7 @@ class AdminSupplierController extends Controller
     {
         $dataSupplierValidated = Supplier::validate($request->all());
         $supplierToUpdate = Supplier::findOrFail($request->input('id'));
-        
+
         $supplierToUpdate->fill($dataSupplierValidated);
         $supplierToUpdate->save();
 
@@ -78,5 +75,4 @@ class AdminSupplierController extends Controller
             ->route('admin.supplier.index')
             ->with('success', 'Supplier updated successfully');
     }
-
 }
