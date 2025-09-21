@@ -1,12 +1,10 @@
 <?php
 
-
 use App\Models\Drug;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Carbon\Carbon;
 
 class Item extends Model
 {
@@ -21,7 +19,7 @@ class Item extends Model
      * $this->attributes['updated_at'] - timestamp - contains the item update date
      * this->drug - Drug - contains the associated drug
      * this->order - Order - contains the associated order
-    **/
+     **/
 
     /* GETTERS */
 
@@ -124,7 +122,7 @@ class Item extends Model
         $this->attributes['created_at'] = $updatedAt;
     }
 
-    /* 
+    /*
     VALIDATIONS
     */
 
@@ -133,7 +131,7 @@ class Item extends Model
         return validator($itemData, static::$rules)->validate();
     }
 
-    /* 
+    /*
      * RELATIONSHIPS
      */
 

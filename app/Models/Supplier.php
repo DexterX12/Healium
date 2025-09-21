@@ -2,25 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Date;
 
 class Supplier extends Model
 {
-
     /**
      * PRODUCT ATTRIBUTES
      * $this->attributes['id'] - int - contains the supplier primary key (id)
      * $this->attributes['name'] - string - contains the supplier name
      * $this->attributes['email'] - string - contains the supplier email
      * $this->attributes['address'] - string - contains the supplier address
-     * $this->drugs - drugs[] - contains a list of associated drugs 
-    */
-
+     * $this->drugs - drugs[] - contains a list of associated drugs
+     */
     protected $fillable = [
         'name',
         'email',
@@ -70,6 +67,7 @@ class Supplier extends Model
     {
         return $this->attributes['drugs'];
     }
+
     /*
      * SETTERS
     */
@@ -102,6 +100,7 @@ class Supplier extends Model
     {
         $this->attributes['drugs'] = $drugs;
     }
+
     /*
      * VALIDATE
     */
@@ -115,4 +114,3 @@ class Supplier extends Model
         return $this->hasMany(Drug::class);
     }
 }
-
