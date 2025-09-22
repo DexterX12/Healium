@@ -76,8 +76,8 @@ class AdminDrugController extends Controller
 
         if ($imagePath) {
             $drugToUpdate->setImage($imagePath);
-            $drugToUpdate->save();
         }
+        $drugToUpdate->save();
 
         return redirect()
             ->route('admin.drug.index')
