@@ -63,9 +63,6 @@ Route::middleware('auth')->group(function () {
     Route::get('order/show/{id}', 'App\Http\Controllers\OrderController@show')
         ->name('order.show');
     
-    Route::get('cart/index', 'App\Http\Controllers\CartController@index')
-        ->name('cart.index');
-    
     Route::post('cart/add/{id}', 'App\Http\Controllers\CartController@add')
         ->name('cart.add');
     
@@ -80,3 +77,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Auth::routes();
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

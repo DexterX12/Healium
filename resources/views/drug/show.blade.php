@@ -9,7 +9,37 @@
             <h2>{{ $viewData['drug']->getName() }} <h6><span class="badge text-bg-success">{{ $viewData['drug']->getCategory() }}</span></h6></h2>
             <p class="text-muted">{{ $viewData['drug']->getDescription() }}</p>
             <h4 class="mb-3">${{ $viewData['drug']->getPrice() }} COP</h4>
-            <a href="#" class="btn btn-primary btn-lg">Buy Now</a>
+            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#addToCartModal">
+                Buy now
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm"> 
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addToCartLabel">Add to Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ route('cart.add', ['id' => $viewData['drug']->getId()]) }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <p><strong>{{ $viewData['drug']->getName() }}</strong></p>
+                    <p>Price: ${{ $viewData['drug']->getPrice() }} COP</p>
+                    
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" name="quantity" id="quantity" class="form-control" value="1" min="1" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
