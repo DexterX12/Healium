@@ -18,7 +18,9 @@
                                 <div class="col-md-6 col-lg-4 @if($index > 0) d-none d-md-block @endif @if($index > 1) d-none d-lg-block @endif">
                                     <a href="{{ route('drug.show', ['id' => $drug->getId()]) }}" class="text-decoration-none text-dark">
                                         <div class="card shadow-sm">
-                                            <img src="{{ asset('/storage/'.$drug->getImage()) }}" class="card-img-top" alt="{{ $drug->getName() }}">
+                                            @if($drug->getImage())
+                                                <img src="{{ asset('/storage/'.$drug->getImage()) }}" class="card-img-top" alt="{{ $drug->getName() }}">
+                                            @endif
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ $drug->getName() }}</h5>
                                                 <p class="card-text">{{ $drug->getDescription() }}</p>

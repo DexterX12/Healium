@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Drug;
 use App\Models\Item;
-
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -18,8 +17,6 @@ class HomeController extends Controller
         $viewData = [];
         $viewData['drugs'] = Drug::orderBy('created_at', 'desc')->get();
         $viewData['cart_items'] = $cartItems;
-        
-
 
         return view('home.index')->with('viewData', $viewData);
     }

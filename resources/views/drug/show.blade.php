@@ -3,7 +3,9 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8 d-flex align-items-center justify-content-center">
-            <img src="{{ asset('/storage/'.$viewData['drug']->getImage()) }}" alt="{{ $viewData['drug']->getName() }}" class="img-fluid rounded shadow">
+            @if($viewData['drug']->getImage())
+                <img src="{{ asset('/storage/'.$viewData['drug']->getImage()) }}" alt="{{ $viewData['drug']->getName() }}" class="img-fluid rounded shadow">
+            @endif
         </div>
         <div class="col-md-4 d-flex flex-column justify-content-center">
             <h2>{{ $viewData['drug']->getName() }} <h6><span class="badge text-bg-success">{{ $viewData['drug']->getCategory() }}</span></h6></h2>

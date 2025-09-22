@@ -20,6 +20,7 @@ class Drug extends Model
      * $this->attributes['chemical_details'] - string - contains the drug quimic details
      * $this->attributes['keywords'] - string - contains the drug keywords
      * $this->attributes['price'] - int- contains the drug price
+     * $this->attributes['img_path'] - string - contains the drug image path
      * $this->attributes['created_at'] - timestamp - contains the drug creation date
      * $this->attributes['updated_at'] - timestamp - contains the drug update date
      * $this->items - Item[] - contains the associated items
@@ -34,6 +35,7 @@ class Drug extends Model
         'chemical_details',
         'keywords',
         'price',
+        'img_path',
     ];
 
     public static array $rules = [
@@ -44,6 +46,7 @@ class Drug extends Model
         'chemical_details' => 'required|string|max:255',
         'keywords' => 'required|string|max:255',
         'price' => 'required|numeric|min:0',
+        'img_path' => 'nullable|string|max:255',
     ];
 
     /*
@@ -99,7 +102,7 @@ class Drug extends Model
         return $this->attributes['supplier_id'];
     }
 
-    public function getImage(): string
+    public function getImage(): string|null
     {
         return $this->attributes['img_path'];
     }
