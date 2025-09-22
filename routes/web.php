@@ -63,9 +63,6 @@ Route::middleware('auth')->group(function () {
     Route::get('order/show/{id}', 'App\Http\Controllers\OrderController@show')
         ->name('order.show');
     
-    Route::get('cart/index', 'App\Http\Controllers\CartController@index')
-        ->name('cart.index');
-    
     Route::post('cart/add/{id}', 'App\Http\Controllers\CartController@add')
         ->name('cart.add');
     

@@ -21,11 +21,18 @@ class Item extends Model
      * this->order - Order - contains the associated order
      **/
 
+    protected $fillable = [
+    'drug_id',
+    'order_id',
+    'quantity',
+    'total',
+    ];
+
     /* GETTERS */
 
     public static array $rules = [
         'drug_id' => 'required|exists:drugs,id',
-        'order_id' => 'required|exists:orders,id',
+        'order_id' => 'nullable|exists:orders,id',
         'quantity' => 'required|numeric|gt:0',
         'total' => 'required|numeric|gt:0',
     ];

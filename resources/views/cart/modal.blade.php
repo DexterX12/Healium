@@ -7,7 +7,7 @@
         </div>
         
         <div class="modal-body">
-            @if($viewData['cartItems']->isEmpty())
+            @if($viewData['cart_items']->isEmpty())
             <p>Your cart is empty.</p>
             @else
             <table class="table">
@@ -19,7 +19,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($viewData['cartItems'] as $item)
+                @foreach($viewData['cart_items'] as $item)
                     <tr>
                     <td>{{ $item->drug->name }}</td>
                     <td>{{ $item->quantity }}</td>
@@ -37,7 +37,7 @@
             @method('DELETE')
             <button type="submit" class="btn btn-danger">Clear Cart</button>
             </form>
-            <a href="{{ route('order.create') }}" class="btn btn-primary">Proceed to Checkout</a>
+            <a href="{{ route('order.save') }}" class="btn btn-primary">Proceed to Checkout</a>
         </div>
         </div>
     </div>
