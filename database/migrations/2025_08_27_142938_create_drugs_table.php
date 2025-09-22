@@ -23,8 +23,7 @@ return new class extends Migration
             $table->integer('price');
             $table->foreign('supplier_id')
                 ->references('id')
-                ->on('suppliers')
-                ->onDelete('strict');
+                ->on('suppliers');
             $table->timestamps();
         });
     }
