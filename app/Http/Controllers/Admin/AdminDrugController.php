@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\ImageStorage;
 use App\Models\Drug;
 use App\Models\Supplier;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class AdminDrugController extends Controller
@@ -52,15 +52,11 @@ class AdminDrugController extends Controller
         $drugDataValidated = Drug::validate($request->all());
         $newDrug = Drug::create($drugDataValidated);
 
-        if ($request->hasFile('image')) {
-            $imageName = $newDrug->getId().'.'.$request->file('image')->extension();
+        $imageStorage = app(ImageStorage::class);
+        $imagePath = $imageStorage->store($request);
 
-            Storage::disk('public')->put(
-                $imageName,
-                file_get_contents($request->file('image')->getRealPath())
-            );
-
-            $newDrug->setImage($imageName);
+        if ($imagePath) {
+            $newDrug->setImage($imagePath);
             $newDrug->save();
         }
 
@@ -75,18 +71,13 @@ class AdminDrugController extends Controller
         $drugToUpdate = Drug::findOrFail($request->input('id'));
         $drugToUpdate->fill($drugDataValidated);
 
-        if ($request->hasFile('image')) {
-            $imageName = $drugToUpdate->getId().'.'.$request->file('image')->extension();
+        $imageStorage = app(ImageStorage::class);
+        $imagePath = $imageStorage->store($request);
 
-            Storage::disk('public')->put(
-                $imageName,
-                file_get_contents($request->file('image')->getRealPath())
-            );
-
-            $drugToUpdate->setImage($imageName);
+        if ($imagePath) {
+            $drugToUpdate->setImage($imagePath);
+            $drugToUpdate->save();
         }
-
-        $drugToUpdate->save();
 
         return redirect()
             ->route('admin.drug.index')

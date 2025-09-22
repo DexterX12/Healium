@@ -20,12 +20,11 @@ class Item extends Model
      * this->drug - Drug - contains the associated drug
      * this->order - Order - contains the associated order
      **/
-
     protected $fillable = [
-    'drug_id',
-    'order_id',
-    'quantity',
-    'total',
+        'drug_id',
+        'order_id',
+        'quantity',
+        'total',
     ];
 
     /* GETTERS */
