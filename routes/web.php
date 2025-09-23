@@ -60,6 +60,9 @@ Route::middleware('auth')->group(function () {
     Route::post('order/save', 'App\Http\Controllers\OrderController@save')
         ->name('order.save');
 
+    Route::post('order/checkout', 'App\Http\Controllers\OrderController@checkout')
+        ->name('order.checkout');
+
     Route::get('order/show/{id}', 'App\Http\Controllers\OrderController@show')
         ->name('order.show');
 
