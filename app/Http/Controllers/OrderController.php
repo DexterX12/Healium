@@ -43,9 +43,9 @@ class OrderController extends Controller
         $orderData = $request->only(['description','payment']);
         $orderData['user_id'] = auth()->id();
 
-        $order = $this->create($orderData);
+        $orderToCreate = $this->create($orderData);
 
-        $this->assignItemsToOrder($cartItemIds, $order->getId());
+        $this->assignItemsToOrder($cartItemIds, $orderToCreate->getId());
 
         $this->clearCart($request);
 
