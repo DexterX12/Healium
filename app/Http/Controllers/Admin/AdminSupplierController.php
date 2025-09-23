@@ -35,7 +35,7 @@ class AdminSupplierController extends Controller
 
         return redirect()
             ->route('admin.supplier.index')
-            ->with('success', 'Supplier created successfully');
+            ->with('success', __('Supplier created successfully'));
     }
 
     public function delete(Request $request): RedirectResponse
@@ -47,7 +47,7 @@ class AdminSupplierController extends Controller
             if ($exception->getCode() === '23000') {
                 return redirect()
                     ->route('admin.supplier.index')
-                    ->with('error', 'This supplier has drugs related to it.');
+                    ->with('error', __('This supplier has drugs related to it.'));
             }
 
             throw $exception;
@@ -55,7 +55,7 @@ class AdminSupplierController extends Controller
 
         return redirect()
             ->route('admin.supplier.index')
-            ->with('success', 'Supplier deleted successfully');
+            ->with('success', __('Supplier deleted successfully'));
     }
 
     public function edit(int $id): View
@@ -77,6 +77,6 @@ class AdminSupplierController extends Controller
 
         return redirect()
             ->route('admin.supplier.index')
-            ->with('success', 'Supplier updated successfully');
+            ->with('success', __('Supplier updated successfully'));
     }
 }

@@ -18,11 +18,14 @@ class DrugController extends Controller
         $searchName = $request->query('name');
         $salesFilter = $request->query('sales_filter');
 
-        if ($searchName) {
+        if ($searchName)
+        {
             $viewData['drugs'] = Drug::searchByName($searchName);
-        } elseif ($salesFilter) {
+        } elseif ($salesFilter)
+        {
             $viewData['drugs'] = Drug::filterBySales($salesFilter);
-        } else {
+        } else
+        {
             $viewData['drugs'] = Drug::all();
         }
 

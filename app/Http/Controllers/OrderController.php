@@ -30,8 +30,9 @@ class OrderController extends Controller
             ->with('items.drug')
             ->find($id);
 
-        if (! $selectedOrder) {
-            return back()->with('fail', 'Order not found');
+        if (! $selectedOrder)
+        {
+            return back()->with('fail', __('Order not found'));
         }
         $viewData['order'] = $selectedOrder;
         $viewData['items'] = $selectedOrder->items;
@@ -42,15 +43,18 @@ class OrderController extends Controller
     public function checkout(Request $request): RedirectResponse
     {
         $cartItemIds = $this->getCartItemsFromSession($request);
-        if (empty($cartItemIds)) {
-            return back()->with('fail', 'Your cart is empty.');
+        if (empty($cartItemIds))
+        {
+            return back()->with('fail', __('Your cart is empty.'));
         }
 
         $cartItems = Item::whereIn('id', $cartItemIds)->with('drug')->get();
-        foreach ($cartItems as $item) {
+        foreach ($cartItems as $item)
+        {
             $drugToFind = Drug::findOrFail($item->getDrugId());
-            if (! $drugToFind || ! $drugToFind->updateStock($item->getQuantity())) {
-                return redirect()->back()->with('fail', 'Insufficient stock for one or more products in the cart.');
+            if (! $drugToFind || ! $drugToFind->updateStock($item->getQuantity()))
+            {
+                return redirect()->back()->with('fail', __('Insufficient stock for one or more products in the cart.'));
             }
         }
 
@@ -65,7 +69,7 @@ class OrderController extends Controller
 
         return redirect()
             ->route('order.index')
-            ->with('success', 'Your order has been purchased successfully!');
+            ->with('success', __('Your order has been purchased successfully!'));
     }
 
     private function getCartItemsFromSession(Request $request): array
