@@ -16,6 +16,7 @@
                             <th>{{ __('Drug') }}</th>
                             <th>{{ __('Quantity') }}</th>
                             <th>{{ __('Total') }}</th>
+                            <th>{{ __('Action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,7 +25,17 @@
                                 <td>{{ $item->drug->getName() }}</td>
                                 <td>{{ $item->getQuantity() }}</td>
                                 <td>${{ number_format($item->getTotal(), 2) }}</td>
+                                <td>
+                                    <form action="{{ route('cart.remove', $item->getId()) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
+                            
                         @endforeach
                     </tbody>
                 </table>

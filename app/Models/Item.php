@@ -50,7 +50,7 @@ class Item extends Model
         return $this->attributes['drug_id'];
     }
 
-    public function getOrderId(): int
+    public function getOrderId(): ?int
     {
         return $this->attributes['order_id'];
     }
