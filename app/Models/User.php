@@ -30,7 +30,6 @@ class User extends Authenticatable
      * $this->attributes['is_admin'] - bool - contains if the user is an admin or not
      * $this->attributes['created_at'] - timestamp - contains the user creation date
      * $this->attributes['updated_at'] - timestamp - contains the user update date
-     * $this->payments - Payment[] - contains the user's associated payment methods
      * $this->orders - Order[] - contains the user's associated product orders
      **/
 
@@ -163,12 +162,6 @@ class User extends Authenticatable
     }
 
     /* RELATIONSHIPS */
-
-    public function payments(): HasMany
-    {
-        return $this->hasMany(Payment::class);
-    }
-
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
