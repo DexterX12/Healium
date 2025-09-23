@@ -18,6 +18,11 @@ class CartController extends Controller
 
         $drugToFind = Drug::findOrFail($drug_id);
         $quantity = $request->input('quantity');
+
+        if ($quantity > $drugToFind->getStock()) {
+            return back()->with('fail', 'Insufficient stock for the requested quantity.');
+        }
+
         $total = $drugToFind->getPrice() * $quantity;
 
         $this->addOrUpdateItemInCart($drugToFind, $quantity, $total, $request);
@@ -66,11 +71,11 @@ class CartController extends Controller
     {
         $cartItemIds = $request->session()->get('cart_item_data', []);
 
-        $updatedCart = array_filter($cartItemIds, fn($id) => $id != $itemId);
+        $updatedCart = array_filter($cartItemIds, fn ($id) => $id != $itemId);
         $request->session()->put('cart_item_data', $updatedCart);
 
         $item = Item::find($itemId);
-        if ($item && $item->getOrderId() === null) { 
+        if ($item && $item->getOrderId() === null) {
             $item->delete();
 
             return back()->with('success', 'Item removed from cart');
@@ -78,7 +83,5 @@ class CartController extends Controller
 
         return back()->with('fail', 'Item could not be removed from cart');
 
-        
     }
-
 }

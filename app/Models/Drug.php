@@ -25,6 +25,7 @@ class Drug extends Model
      * $this->attributes['chemical_details'] - string - contains the drug quimic details
      * $this->attributes['keywords'] - string - contains the drug keywords
      * $this->attributes['price'] - int- contains the drug price
+     * $this->attributes['stock'] - int - contains the drug stock
      * $this->attributes['img_path'] - string - contains the drug image path
      * $this->attributes['created_at'] - timestamp - contains the drug creation date
      * $this->attributes['updated_at'] - timestamp - contains the drug update date
@@ -41,6 +42,7 @@ class Drug extends Model
         'keywords',
         'price',
         'img_path',
+        'stock',
     ];
 
     public static array $rules = [
@@ -52,6 +54,7 @@ class Drug extends Model
         'keywords' => 'required|string|max:255',
         'price' => 'required|numeric|min:0',
         'img_path' => 'nullable|string|max:255',
+        'stock' => 'required|integer|min:0',
     ];
 
     /*
@@ -90,6 +93,11 @@ class Drug extends Model
     public function getPrice(): int
     {
         return $this->attributes['price'];
+    }
+
+    public function getStock(): int
+    {
+        return $this->attributes['stock'];
     }
 
     public function getCreatedAtTimestamp(): Carbon
@@ -166,6 +174,11 @@ class Drug extends Model
         $this->attributes['price'] = $price;
     }
 
+    public function setStock(int $stock): void
+    {
+        $this->attributes['stock'] = $stock;
+    }
+
     public function setSupplierId(int $id): void
     {
         $this->attributes['supplier_id'] = $id;
@@ -213,6 +226,10 @@ class Drug extends Model
 
     }
 
+    /*
+     * ADDITIONAL FUNCTIONS
+     */
+
     public static function searchByName(string $name): Collection
     {
         return Drug::where('name', 'LIKE', '%'.$name.'%')->get();
@@ -237,5 +254,17 @@ class Drug extends Model
             ->orderBy('total_sold', 'desc')
             ->limit($limit)
             ->get();
+    }
+
+    public function updateStock(int $quantity): bool
+    {
+        if ($this->getStock() >= $quantity) {
+            $this->setStock($this->getStock() - $quantity);
+            $this->save();
+
+            return true;
+        }
+
+        return false;
     }
 }

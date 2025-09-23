@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('chemical_details');
             $table->string('keywords');
             $table->integer('price');
+            $table->integer('stock')->default(0);
             $table->foreign('supplier_id')
                 ->references('id')
                 ->on('suppliers');

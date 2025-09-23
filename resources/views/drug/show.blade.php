@@ -11,6 +11,7 @@
             <h2>{{ $viewData['drug']->getName() }} <h6><span class="badge text-bg-success">{{ $viewData['drug']->getCategory() }}</span></h6></h2>
             <p class="text-muted">{{ $viewData['drug']->getDescription() }}</p>
             <h4 class="mb-3">${{ $viewData['drug']->getPrice() }} COP</h4>
+            <p><strong>{{ __('Stock available') }}:</strong> {{ $viewData['drug']->getStock() }}</p>
             <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#addToCartModal">
                 {{ __('Buy now') }}
             </button>

@@ -6,6 +6,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Drug;
 use App\Models\Item;
 use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
@@ -43,6 +44,14 @@ class OrderController extends Controller
         $cartItemIds = $this->getCartItemsFromSession($request);
         if (empty($cartItemIds)) {
             return back()->with('fail', 'Your cart is empty.');
+        }
+
+        $cartItems = Item::whereIn('id', $cartItemIds)->with('drug')->get();
+        foreach ($cartItems as $item) {
+            $drugToFind = Drug::findOrFail($item->getDrugId());
+            if (! $drugToFind || ! $drugToFind->updateStock($item->getQuantity())) {
+                return redirect()->back()->with('fail', 'Insufficient stock for one or more products in the cart.');
+            }
         }
 
         $orderData = $request->only(['description', 'payment']);
