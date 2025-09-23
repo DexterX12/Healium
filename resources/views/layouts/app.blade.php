@@ -60,14 +60,14 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 mb-3 mb-md-0">
-                    <h5 class="fw-bold mb-1">Healium Pharmacy</h5>
+                    <h5 class="fw-bold mb-1">{{ __('Healium Pharmacy') }}</h5>
                     <p class="mb-0 small">
-                        Quality medicines, caring for your health.<br>
+                        {{ __('Quality medicines, caring for your health.') }}<br>
                         <i class="bi bi-geo-alt"></i> Bogotá, Colombia
                     </p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <span class="me-2">Follow us:</span>
+                    <span class="me-2">{{ __('Follow us:') }}</span>
                     <a href="#" class="text-white me-2"><i class="bi bi-facebook fs-5"></i></a>
                     <a href="#" class="text-white me-2"><i class="bi bi-instagram fs-5"></i></a>
                     <a href="#" class="text-white"><i class="bi bi-twitter fs-5"></i></a>
@@ -75,7 +75,7 @@
             </div>
             <hr class="border-light my-3">
             <div class="text-center small">
-                &copy; {{ date('Y') }} Healium Pharmacy. All rights reserved.
+                &copy; {{ date('Y') }} {{ __('Healium Pharmacy. All rights reserved.') }}
             </div>
         </div>
     </footer>
