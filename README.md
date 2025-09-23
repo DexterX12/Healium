@@ -1,4 +1,10 @@
 # Healium - Laravel Project
+## Members
+- Darieth Farid Sánchez Velásquez
+- Miguel Ángel Cano Salinas
+- Delvin José Rodríguez Jimenez
+
+---
 
 ## Description
 **Healium** is a web application that functions as an online pharmacy.  
