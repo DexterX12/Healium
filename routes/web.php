@@ -69,6 +69,9 @@ Route::middleware('auth')->group(function () {
     Route::post('cart/add/{id}', 'App\Http\Controllers\CartController@add')
         ->name('cart.add');
 
+    Route::delete('/cart/remove/{id}', 'App\Http\Controllers\CartController@remove')
+    ->name('cart.remove');
+
     Route::delete('cart/removeAll', 'App\Http\Controllers\CartController@removeAll')
         ->name('cart.removeAll');
 

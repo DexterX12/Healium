@@ -54,4 +54,24 @@ class CartController extends Controller
 
         return back()->with('success', 'Cart cleared');
     }
+
+    public function remove(int $itemId, Request $request): RedirectResponse
+    {
+        $cartItemIds = $request->session()->get('cart_item_data', []);
+
+        $updatedCart = array_filter($cartItemIds, fn($id) => $id != $itemId);
+        $request->session()->put('cart_item_data', $updatedCart);
+
+        $item = Item::find($itemId);
+        if ($item && $item->getOrderId() === null) { 
+            $item->delete();
+
+            return back()->with('success', 'Item removed from cart');
+        }
+
+        return back()->with('fail', 'Item could not be removed from cart');
+
+        
+    }
+
 }
