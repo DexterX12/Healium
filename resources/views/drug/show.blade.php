@@ -66,6 +66,15 @@
                         @endif
                         on {{ $comment->getCreatedAtTimestamp() }}
                     </small>
+                    @if(auth()->check() && method_exists($comment, 'user') && $comment->user() && auth()->id() === $comment->user->getId())
+                        <form action="{{ route('comment.delete', ['id' => $comment->getId()]) }}" method="POST" class="d-inline ms-2">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this comment?');">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        </form>
+                    @endif
                 </div>
             </div>
         @endforeach

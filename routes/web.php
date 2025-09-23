@@ -75,6 +75,9 @@ Route::middleware('auth')->group(function () {
     Route::post('comment/{id}/add', 'App\Http\Controllers\CommentController@save')
         ->name('comment.add');
 
+    Route::delete('comment/delete/{id}', 'App\Http\Controllers\CommentController@delete')
+        ->name('comment.delete');
+
     Route::delete('order/delete/{id}', 'App\Http\Controllers\OrderController@save')
         ->name('order.delete');
 });
