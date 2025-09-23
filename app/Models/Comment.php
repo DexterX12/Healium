@@ -23,6 +23,7 @@ class Comment extends Model
     public static array $rules = [
         'description' => 'required|max:500',
         'drug_id' => 'required|exists:drugs,id',
+        'user_id' => 'required|exists:users,id',
     ];
 
     /** GETTERS */
@@ -46,6 +47,16 @@ class Comment extends Model
         return $this->attributes['drug_id'];
     }
 
+    public function getCreatedAtTimestamp(): string
+    {
+        return $this->attributes['created_at'];
+    }
+
+    public function getUpdatedAtTimestamp(): string
+    {
+        return $this->attributes['updated_at'];
+    }
+
     /**SETTERS */
 
     public function setDescription(string $desc): void
@@ -61,6 +72,16 @@ class Comment extends Model
     public function setUserId(int $pId): void
     {
         $this->attributes['user_id'] = $pId;
+    }
+
+    public function setCreatedAtTimestamp(string $createdAt): void
+    {
+        $this->attributes['created_at'] = $createdAt;
+    }
+
+    public function setUpdatedAtTimestamp(string $updatedAt): void
+    {
+        $this->attributes['updated_at'] = $updatedAt;
     }
 
     /** RELATIONSHIPS */

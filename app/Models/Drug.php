@@ -112,6 +112,11 @@ class Drug extends Model
         return $this->supplier;
     }
 
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
     /*
      *SETTERS
     */
@@ -169,6 +174,11 @@ class Drug extends Model
     public function setSupplier(Supplier $supplier): void
     {
         $this->supplier = $supplier;
+    }
+
+    public function setComment(Comment $comment): void
+    {
+        $this->comments()->save($comment);
     }
 
     /*

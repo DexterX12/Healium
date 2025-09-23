@@ -72,8 +72,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('cart/removeAll', 'App\Http\Controllers\CartController@removeAll')
         ->name('cart.removeAll');
 
-    Route::post('comment/save', 'App\Http\Controllers\CommentController@save')
-        ->name('comment.save');
+    Route::post('comment/{id}/add', 'App\Http\Controllers\CommentController@save')
+        ->name('comment.add');
+
+    Route::delete('comment/delete/{id}', 'App\Http\Controllers\CommentController@delete')
+        ->name('comment.delete');
 
     Route::delete('order/delete/{id}', 'App\Http\Controllers\OrderController@save')
         ->name('order.delete');
