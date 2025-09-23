@@ -30,7 +30,7 @@ Clone the repository and install dependencies:
 git clone https://github.com/DexterX12/Healium.git
 cd healium
 composer install
-npm install && npm run dev
+php artisan serve
 ```
 
 ### Set up your enviroment file
@@ -73,7 +73,7 @@ Access the application at: http://127.0.0.1:8000
 
 - **Product comments** → View and leave comments on items.
 
-### Admin Workflow
+### Admin Workflow (** is assigned manually in database **)
 
 Access the admin panel at: http://127.0.0.1:8000/admin/index
 
