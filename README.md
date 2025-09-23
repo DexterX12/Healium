@@ -30,7 +30,6 @@ Clone the repository and install dependencies:
 git clone https://github.com/DexterX12/Healium.git
 cd healium
 composer install
-php artisan serve
 ```
 
 ### Set up your enviroment file
@@ -46,6 +45,11 @@ DB_PASSWORD=
 ### Generate the application key
 ```bash
 php artisan key:generate
+```
+
+### Link the storage to save images
+```bash
+php artisan storage:link
 ```
 ### Run migrations and sedd the database
 ```bash
