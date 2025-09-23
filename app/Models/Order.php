@@ -16,8 +16,8 @@ class Order extends Model
      * Order ATTRIBUTES
      * $this->attributes['id'] - int - contains the item primary key (id)
      * $this->attributes['user_id'] - int - contains the id of the user who created the order
-     * $this->attirbutes['description'] - string - contains the order details, if applicable
-     * $this->attirbutes['payment'] - string - contains the payment method used in the order
+     * $this->attributes['description'] - string - contains the order details, if applicable
+     * $this->attributes['payment'] - string - contains the payment method used in the order
      * $this->attributes['created_at'] - timestamp - contains the order creation date
      * $this->attributes['updated_at'] - timestamp - contains the order update date
      *

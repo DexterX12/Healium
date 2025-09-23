@@ -30,7 +30,9 @@ class User extends Authenticatable
      * $this->attributes['is_admin'] - bool - contains if the user is an admin or not
      * $this->attributes['created_at'] - timestamp - contains the user creation date
      * $this->attributes['updated_at'] - timestamp - contains the user update date
+
      * $this->orders - Order[] - contains the user's associated product orders
+     * $this->comments - Comment[] - contains the user's associated comments
      **/
 
     /**
@@ -94,24 +96,24 @@ class User extends Authenticatable
         return $this->attributes['is_admin'];
     }
 
-    public function getCreatedAt(): Carbon
+    public function getCreatedAt(): string
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAt(): Carbon
+    public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
-    }
-
-    public function getPayments(): Collection
-    {
-        return $this->payments;
     }
 
     public function getOrders(): Collection
     {
         return $this->orders;
+    }
+    
+    public function getComments(): Collection
+    {
+        return $this->comments;
     }
 
     /* SETTERS */
@@ -151,19 +153,24 @@ class User extends Authenticatable
         $this->attributes['updated_at'] = $updatedAt;
     }
 
-    public function setPayments(Collection $payments): void
-    {
-        $this->payments = $payments;
-    }
-
     public function setOrders(Collection $orders): void
     {
         $this->orders = $orders;
+    }
+
+    public function setComments(Collection $comments): void
+    {
+        $this->comments = $comments;
     }
 
     /* RELATIONSHIPS */
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }
