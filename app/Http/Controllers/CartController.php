@@ -12,11 +12,11 @@ class CartController extends Controller
     public function add(int $drug_id, Request $request): RedirectResponse
     {
 
-        $drug = Drug::findOrFail($drug_id);
+        $drugToFind = Drug::findOrFail($drug_id);
         $quantity = $request->input('quantity');
-        $total = $drug->getPrice() * $quantity;
+        $total = $drugToFind->getPrice() * $quantity;
 
-        $this->addOrUpdateItemInCart($drug, $quantity, $total, $request);
+        $this->addOrUpdateItemInCart($drugToFind, $quantity, $total, $request);
 
         return back()->with('success', 'Item added to cart');
     }
@@ -26,6 +26,10 @@ class CartController extends Controller
         $cartItemIds = $request->session()->get('cart_item_data', []);
         $items = Item::whereIn('id', $cartItemIds)->get();
         $existingItem = $items->firstWhere('drug_id', $drug->getId());
+
+        $itemsInCart = Item::whereIn('id', $cartItemIds)->get();
+
+        $existingItem = $itemsInCart->firstWhere('drug_id', $drug->getId());
 
         if ($existingItem) {
             $existingItem->setQuantity($existingItem->getQuantity() + $quantity);
