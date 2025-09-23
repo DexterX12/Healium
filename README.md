@@ -55,24 +55,24 @@ Access the application at: http://127.0.0.1:8000
 
 - Product browsing → View available medicines without registering.
 
-- User management → Register and log in (required for making purchases).
+- **User management** → Register and log in (required for making purchases).
 
-- Shopping cart → Add or delet products, specify quantity, and proceed to checkout.
+- **Shopping cart** → Add or delet products, specify quantity, and proceed to checkout.
 
-- Payment options → Pay using cash or credit card.
+- **Payment options** → Pay using cash or credit card.
 
-- Order history → Review past purchases via the Orders tab.
+- **Order history** → Review past purchases via the Orders tab.
 
-- New arrivals → Recently added products are displayed on the homepage.
+- **New arrivals** → Recently added products are displayed on the homepage.
 
-- Product comments → View and leave comments on items.
+- **Product comments** → View and leave comments on items.
 
 ### Admin Workflow
 
 Access the admin panel at: http://127.0.0.1:8000/admin/index
 
-- Drug management → Create and manage new drug entries to be published on the site.
+- **Drug management** → Create and manage new drug entries to be published on the site.
 
-- Data analytics → Access tables with insights on best-selling products and registered users.
+- **Data analytics**→ Access tables with insights on best-selling products and registered users.
 
-- Supplier management → Add, edit, or remove suppliers associated with products.
+- **Supplier management** → Add, edit, or remove suppliers associated with products.
