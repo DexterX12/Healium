@@ -1,5 +1,9 @@
 <?php
 
+/*
+* Author: Miguel Salinas
+*/
+
 namespace App\Models;
 
 use Carbon\Carbon;

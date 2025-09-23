@@ -1,5 +1,9 @@
 <?php
 
+/*
+* Author: Miguel Salinas
+*/
+
 namespace App\Http\Controllers;
 
 use App\Models\Drug;
