@@ -12,7 +12,6 @@ class Comment extends Model
      * $this->attributes['id'] - int - contains the product primary key (id)
      * $this->attributes['drug_id'] - int - contains the drug id associated to the comment
      * $this->attributes['user_id'] - int - contains the user id associated to the comment
-     *
      * $this->attributes['description'] - string - contains the comment description
      *
      * RELATIONSHIPS
