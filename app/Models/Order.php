@@ -22,11 +22,17 @@ class Order extends Model
      * $this->user - User - the user who created the order (N:1)
      * $this->items - Item[] - the list of items belonging to the order (1:N)
      **/
+
+    protected $fillable = [
+        'user_id',
+        'description',
+        'payment'
+    ];
+
     public static array $rules = [
         'user_id' => 'required|exists:users,id',
         'description' => 'nullable|string|max:255',
-        'payment' => 'string|max:50',
-
+        'payment' => 'required|string|in:cash,card',
     ];
 
     /* GETTERS */
@@ -41,17 +47,17 @@ class Order extends Model
         return $this->attributes['user_id'];
     }
 
-    public function getCreatedAtTimestamp(): Carbon
+    public function getCreatedAtTimestamp(): string
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAtTimestamp(): Carbon
+    public function getUpdatedAtTimestamp(): string
     {
         return $this->attributes['updated_at'];
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->attributes['description'];
     }

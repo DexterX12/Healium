@@ -18,17 +18,12 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="{{ route('home.index') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('drug.index') }}">Products</a></li>
-
-                    <div class="vr bg-white mx-2 d-none d-lg-block"></div>
                     @guest
                     <li><a class="nav-link active" href="{{ route('login') }}">Login</a></li>
                     <li><a class="nav-link active" href="{{ route('register') }}">Register</a></li>
                     @else
-                    <li>
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">
-                            <i class="bi bi-cart"></i> Cart
-                        </a>
-                    </li>
+                    <li><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">Cart</a></li>
+                    <li><a class="nav-link" href="{{ route('order.index') }}">Orders</a></li>
                     <form id="logout" action="{{ route('logout') }}" method="POST">
                         <a role="button" class="nav-link active"
                         onclick="document.getElementById('logout').submit();">Logout</a>
@@ -42,6 +37,21 @@
 
 
     <main class="container">
+        @if($errors->any())
+            <ul id="errors" class="alert alert-danger list-unstyled">
+                @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @elseif(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @elseif(session('fail'))
+                <div class="alert alert-danger">
+                        {{ session('fail') }}
+                    </div>
+            @endif
         @yield('content')
     </main>
 
