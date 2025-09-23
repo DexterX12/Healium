@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Date;
 
 class Supplier extends Model
 {
@@ -53,12 +52,12 @@ class Supplier extends Model
         return $this->attributes['address'];
     }
 
-    public function getCreatedAtTimestamp(): Date
+    public function getCreatedAtTimestamp(): string
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAtTimestamp(): Date
+    public function getUpdatedAtTimestamp(): string
     {
         return $this->attributes['updated_at'];
     }

@@ -102,7 +102,7 @@ class Drug extends Model
         return $this->attributes['supplier_id'];
     }
 
-    public function getImage(): string|null
+    public function getImage(): ?string
     {
         return $this->attributes['img_path'];
     }
@@ -110,6 +110,11 @@ class Drug extends Model
     public function getSupplier(): Supplier
     {
         return $this->supplier;
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
     }
 
     /*
@@ -169,6 +174,11 @@ class Drug extends Model
     public function setSupplier(Supplier $supplier): void
     {
         $this->supplier = $supplier;
+    }
+
+    public function setComment(Comment $comment): void
+    {
+        $this->comments()->save($comment);
     }
 
     /*

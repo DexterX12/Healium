@@ -46,4 +46,56 @@
     </div>
 </div>
 
+<div class="container mt-4">
+    <h4>Comments</h4>
+    <!-- Botón para añadir comentario -->
+    <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addCommentModal">
+        <i class="bi bi-chat-dots"></i> Add Comment
+    </button>
+
+    @if($viewData['drug']->getComments()->count())
+        @foreach($viewData['drug']->getComments() as $comment)
+            <div class="card mb-2">
+                <div class="card-body">
+                    <p class="mb-1">{{ $comment->getDescription() }}</p>
+                    <small class="text-muted">
+                        @if(method_exists($comment, 'user') && $comment->user())
+                            By: {{ $comment->user->getName() }}
+                        @else
+                            By: Anonymous
+                        @endif
+                        on {{ $comment->getCreatedAtTimestamp() }}
+                    </small>
+                </div>
+            </div>
+        @endforeach
+    @else
+        <p class="text-muted">There are no comments</p>
+    @endif
+</div>
+<div class="modal fade" id="addCommentModal" tabindex="-1" aria-labelledby="addCommentLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="addCommentLabel"><i class="bi bi-chat-dots"></i> Add a Comment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ route('comment.add', ['id' => $viewData['drug']->getId()]) }}" method="POST">
+                @csrf
+                <input type="hidden" name="drug_id" value="{{ $viewData['drug']->getId() }}">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="commentDescription" class="form-label">Your Comment</label>
+                        <textarea name="description" id="commentDescription" class="form-control" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @endsection
