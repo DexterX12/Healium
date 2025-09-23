@@ -1,8 +1,11 @@
 <?php
 
+/*
+* Author: Darieth
+*/
+
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -22,11 +25,10 @@ class Order extends Model
      * $this->user - User - the user who created the order (N:1)
      * $this->items - Item[] - the list of items belonging to the order (1:N)
      **/
-
     protected $fillable = [
         'user_id',
         'description',
-        'payment'
+        'payment',
     ];
 
     public static array $rules = [

@@ -1,5 +1,9 @@
 <?php
 
+/*
+* Author: Miguel Salinas
+*/
+
 namespace App\Providers;
 
 use App\Interfaces\ImageStorage;

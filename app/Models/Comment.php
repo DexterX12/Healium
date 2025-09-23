@@ -1,5 +1,9 @@
 <?php
 
+/*
+* Author: Darieth
+*/
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +16,6 @@ class Comment extends Model
      * $this->attributes['id'] - int - contains the product primary key (id)
      * $this->attributes['drug_id'] - int - contains the drug id associated to the comment
      * $this->attributes['user_id'] - int - contains the user id associated to the comment
-     *
      * $this->attributes['description'] - string - contains the comment description
      *
      * RELATIONSHIPS
@@ -24,6 +27,7 @@ class Comment extends Model
     public static array $rules = [
         'description' => 'required|max:500',
         'drug_id' => 'required|exists:drugs,id',
+        'user_id' => 'required|exists:users,id',
     ];
 
     /** GETTERS */
@@ -47,6 +51,16 @@ class Comment extends Model
         return $this->attributes['drug_id'];
     }
 
+    public function getCreatedAtTimestamp(): string
+    {
+        return $this->attributes['created_at'];
+    }
+
+    public function getUpdatedAtTimestamp(): string
+    {
+        return $this->attributes['updated_at'];
+    }
+
     /**SETTERS */
 
     public function setDescription(string $desc): void
@@ -62,6 +76,16 @@ class Comment extends Model
     public function setUserId(int $pId): void
     {
         $this->attributes['user_id'] = $pId;
+    }
+
+    public function setCreatedAtTimestamp(string $createdAt): void
+    {
+        $this->attributes['created_at'] = $createdAt;
+    }
+
+    public function setUpdatedAtTimestamp(string $updatedAt): void
+    {
+        $this->attributes['updated_at'] = $updatedAt;
     }
 
     /** RELATIONSHIPS */

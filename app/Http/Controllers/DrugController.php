@@ -1,5 +1,9 @@
 <?php
 
+/*
+* Author: Miguel Salinas
+*/
+
 namespace App\Http\Controllers;
 
 use App\Models\Drug;
@@ -28,7 +32,7 @@ class DrugController extends Controller
     public function show(int $id): View
     {
         $viewData = [];
-        $selectedDrug = Drug::findOrFail($id);
+        $selectedDrug = Drug::with('comments')->findOrFail($id);
         $viewData['drug'] = $selectedDrug;
 
         return view('drug.show')->with('viewData', $viewData);

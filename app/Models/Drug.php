@@ -1,5 +1,9 @@
 <?php
 
+/*
+* Author: Miguel Salinas
+*/
+
 namespace App\Models;
 
 use Carbon\Carbon;
@@ -7,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
 class Drug extends Model
 {
@@ -102,7 +107,7 @@ class Drug extends Model
         return $this->attributes['supplier_id'];
     }
 
-    public function getImage(): string|null
+    public function getImage(): ?string
     {
         return $this->attributes['img_path'];
     }
@@ -110,6 +115,11 @@ class Drug extends Model
     public function getSupplier(): Supplier
     {
         return $this->supplier;
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
     }
 
     /*
@@ -171,6 +181,11 @@ class Drug extends Model
         $this->supplier = $supplier;
     }
 
+    public function setComment(Comment $comment): void
+    {
+        $this->comments()->save($comment);
+    }
+
     /*
      * VALIDATE
     */
@@ -212,5 +227,15 @@ class Drug extends Model
         }
 
         return Drug::all();
+    }
+
+    public static function getTopSales(int $limit): Collection
+    {
+        return Drug::select('drugs.id', 'drugs.name', DB::raw('SUM(items.quantity) as total_sold'))
+            ->join('items', 'drugs.id', '=', 'items.drug_id')
+            ->groupBy('drugs.id', 'drugs.name')
+            ->orderBy('total_sold', 'desc')
+            ->limit($limit)
+            ->get();
     }
 }

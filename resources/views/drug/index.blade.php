@@ -1,21 +1,21 @@
 @extends('layouts.app')
 @section('content')
 	<div class="container py-5">
-		<h1 class="mb-4 text-center fw-bold text-primary">Our Products</h1>
+		<h1 class="mb-4 text-center fw-bold text-primary">{{ __('Our Products') }}</h1>
 		
 		<form method="GET" action="{{ route('drug.index') }}" class="row mb-4 justify-content-center">
 			<div class="col-md-4 mb-2 mb-md-0">
-				<input type="text" name="name" class="form-control" placeholder="Search drugs..." value="{{ request('name') }}">
+				<input type="text" name="name" class="form-control" placeholder="{{ __('Search drugs...') }}" value="{{ request('name') }}">
 			</div>
 			<div class="col-md-3 mb-2 mb-md-0">
 				<select name="sales_filter" class="form-select">
-					<option value="">Filter by sales</option>
+					<option value="">{{ __('Filter by sales') }}</option>
 					<option value="asc" {{ request('sales_filter') == 'asc' ? 'selected' : '' }}>Lowest sales</option>
 					<option value="desc" {{ request('sales_filter') == 'desc' ? 'selected' : '' }}>Highest sales</option>
 				</select>
 			</div>
 			<div class="col-md-2">
-				<button type="submit" class="btn btn-primary w-100">Apply</button>
+				<button type="submit" class="btn btn-primary w-100">{{ __('Apply') }}</button>
 			</div>
 		</form>
 		
@@ -33,7 +33,7 @@
 							<div class="mt-2">
 								<span class="fw-bold">${{ $drug->getPrice() }} COP</span>
 								@if(method_exists($drug, 'getSalesAmount'))
-									<div class="text-muted small">Sales: {{ $drug->getSalesAmount() }}</div>
+									<div class="text-muted small">{{ __('Sales') }}: {{ $drug->getSalesAmount() }}</div>
 								@endif
 							</div>
 						</div>

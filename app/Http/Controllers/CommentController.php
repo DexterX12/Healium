@@ -1,5 +1,9 @@
 <?php
 
+/*
+* Author: Darieth - Miguel Salinas
+*/
+
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
@@ -10,9 +14,9 @@ class CommentController extends Controller
 {
     public function save(Request $request): RedirectResponse
     {
-        $data = $request->only(['description', 'drug_id']);
-        $data['user_id'] = auth()->id();
-        $commentDataValidated = Comment::validate($data);
+        $dataToValidate = $request->only(['description', 'drug_id']);
+        $dataToValidate['user_id'] = auth()->id();
+        $commentDataValidated = Comment::validate($dataToValidate);
         Comment::create($commentDataValidated);
 
         return back()
@@ -21,11 +25,11 @@ class CommentController extends Controller
 
     public function delete(int $id): RedirectResponse
     {
-        $comment = Comment::findOrFail($id);
-        if ($comment->getUserId() !== auth()->id()) {
+        $commentToDelete = Comment::findOrFail($id);
+        if ($commentToDelete->getUserId() !== auth()->id()) {
             return back()->with('error', 'You are not allowed to delete this comment');
         }
-        $comment->delete();
+        $commentToDelete->delete();
 
         return back()
             ->with('success', 'Comment deleted successfully');
