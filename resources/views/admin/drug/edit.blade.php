@@ -40,6 +40,10 @@
             <label for="price" class="form-label">{{ __('Price') }}</label>
             <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ $viewData['drug']->getPrice() }}" required>
         </div>
+       <div class="mb-3">
+            <label for="price" class="form-label">{{ __('Stock') }}</label>
+            <input type="number" step="1" class="form-control" id="stock" name="stock" required>
+        </div>
         <div class="mb-3">
             <label for="image" class="form-label">{{ __('Drug Image') }}</label>
             @if($viewData['drug']->getImage())

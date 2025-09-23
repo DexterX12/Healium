@@ -37,6 +37,10 @@
             <input type="number" step="1" class="form-control" id="price" name="price" required>
         </div>
         <div class="mb-3">
+            <label for="price" class="form-label">{{ __('Stock') }}</label>
+            <input type="number" step="1" class="form-control" id="stock" name="stock" required>
+        </div>
+        <div class="mb-3">
             <label for="image" class="form-label">{{ __('Drug Image') }}</label>
             <input type="file" class="form-control" id="image" name="image" accept="image/*">
         </div>
