@@ -1,5 +1,9 @@
 <?php
 
+/*
+* Author: Miguel Salinas
+*/
+
 namespace App\Interfaces;
 
 use Illuminate\Http\Request;

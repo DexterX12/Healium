@@ -1,5 +1,9 @@
 <?php
 
+/*
+* Author: Delvin
+*/
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;

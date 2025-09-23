@@ -1,5 +1,9 @@
 <?php
 
+/*
+* Author: Darieth
+*/
+
 namespace App\Util;
 
 use App\Interfaces\ImageStorage;

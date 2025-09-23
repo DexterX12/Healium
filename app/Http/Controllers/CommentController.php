@@ -1,5 +1,9 @@
 <?php
 
+/*
+* Author: Darieth - Miguel Salinas
+*/
+
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
