@@ -29,25 +29,26 @@ npm install && npm run dev
 
 ### Set up your enviroment file
 
+```bash
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=healium
 DB_USERNAME=root
 DB_PASSWORD=
-
+```
 ### Generate the application key
-
+```bash
 php artisan key:generate
-
+```
 ### Run migrations and sedd the database
-
+```bash
 php artisan migrate --seed
-
+```
 ### Make sure your Apache server and MySQL (via XAMPP or similar) are running, then start the Laravel server
-
+```bash
 php artisan serve
-
+```
 Access the application at: http://127.0.0.1:8000
 
 ### User Workflow
