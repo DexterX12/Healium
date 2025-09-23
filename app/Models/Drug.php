@@ -102,7 +102,7 @@ class Drug extends Model
         return $this->attributes['supplier_id'];
     }
 
-    public function getImage(): string|null
+    public function getImage(): ?string
     {
         return $this->attributes['img_path'];
     }

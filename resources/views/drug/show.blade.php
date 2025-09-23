@@ -12,7 +12,7 @@
             <p class="text-muted">{{ $viewData['drug']->getDescription() }}</p>
             <h4 class="mb-3">${{ $viewData['drug']->getPrice() }} COP</h4>
             <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#addToCartModal">
-                Buy now
+                {{ __('Buy now') }}
             </button>
         </div>
     </div>
@@ -23,23 +23,23 @@
     <div class="modal-dialog modal-sm"> 
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addToCartLabel">Add to Cart</h5>
+                <h5 class="modal-title" id="addToCartLabel">{{ __('Add to Cart') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form action="{{ route('cart.add', ['id' => $viewData['drug']->getId()]) }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <p><strong>{{ $viewData['drug']->getName() }}</strong></p>
-                    <p>Price: ${{ $viewData['drug']->getPrice() }} COP</p>
+                    <p>{{ __('Price') }}: ${{ $viewData['drug']->getPrice() }} COP</p>
                     
                     <div class="mb-3">
-                        <label for="quantity" class="form-label">Quantity</label>
+                        <label for="quantity" class="form-label">{{ __('Quantity') }}</label>
                         <input type="number" name="quantity" id="quantity" class="form-control" value="1" min="1" required>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Add</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">{{ __('Add') }}</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('Cancel') }}</button>
                 </div>
             </form>
         </div>

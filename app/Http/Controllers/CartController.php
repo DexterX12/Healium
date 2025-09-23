@@ -24,9 +24,7 @@ class CartController extends Controller
     private function addOrUpdateItemInCart(Drug $drug, int $quantity, int $total, Request $request): void
     {
         $cartItemIds = $request->session()->get('cart_item_data', []);
-
         $items = Item::whereIn('id', $cartItemIds)->get();
-
         $existingItem = $items->firstWhere('drug_id', $drug->getId());
 
         if ($existingItem) {
@@ -44,6 +42,7 @@ class CartController extends Controller
             $itemDataValidated = Item::validate($itemData);
             $item = Item::create($itemDataValidated);
             $cartItemIds[] = $item->getId();
+
             $request->session()->put('cart_item_data', $cartItemIds);
         }
     }

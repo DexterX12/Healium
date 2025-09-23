@@ -4,29 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Healium Drug Store</title>
+    <title>{{ __('Healium Drug Store') }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="{{route('home.index')}}">Healium</a>
+            <a class="navbar-brand fw-bold text-primary" href="{{route('home.index')}}">{{ __('Healium') }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="{{ route('home.index') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('drug.index') }}">Products</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{ route('home.index') }}">{{ __('Home') }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('drug.index') }}">{{ __('Products') }}</a></li>
                     @guest
-                    <li><a class="nav-link active" href="{{ route('login') }}">Login</a></li>
-                    <li><a class="nav-link active" href="{{ route('register') }}">Register</a></li>
+                    <li><a class="nav-link active" href="{{ route('login') }}">{{ __('Login')}}</a></li>
+                    <li><a class="nav-link active" href="{{ route('register') }}">{{ __('Register')}}</a></li>
                     @else
-                    <li><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">Cart</a></li>
-                    <li><a class="nav-link" href="{{ route('order.index') }}">Orders</a></li>
+                    <li><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">{{ __('Cart') }}</a></li>
+                    <li><a class="nav-link" href="{{ route('order.index') }}">{{ __('Orders') }}</a></li>
                     <form id="logout" action="{{ route('logout') }}" method="POST">
                         <a role="button" class="nav-link active"
-                        onclick="document.getElementById('logout').submit();">Logout</a>
+                        onclick="document.getElementById('logout').submit();">{{ __('Logout') }}</a>
                         @csrf
                     </form>
                     @endguest

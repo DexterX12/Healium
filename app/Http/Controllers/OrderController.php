@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
 use App\Models\Item;
+use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -22,14 +22,15 @@ class OrderController extends Controller
     {
         $viewData = [];
         $selectedOrder = Order::where('user_id', auth()->id())
-        ->with('items.drug')
-        ->find($id);
+            ->with('items.drug')
+            ->find($id);
 
         if (! $selectedOrder) {
             return back()->with('fail', 'Order not found');
         }
         $viewData['order'] = $selectedOrder;
         $viewData['items'] = $selectedOrder->items;
+
         return view('order.show')->with('viewData', $viewData);
     }
 
@@ -40,7 +41,7 @@ class OrderController extends Controller
             return back()->with('fail', 'Your cart is empty.');
         }
 
-        $orderData = $request->only(['description','payment']);
+        $orderData = $request->only(['description', 'payment']);
         $orderData['user_id'] = auth()->id();
 
         $order = $this->create($orderData);
@@ -69,7 +70,6 @@ class OrderController extends Controller
     {
         $request->session()->forget('cart_item_data');
     }
-
 
     public function create(array $data): Order
     {

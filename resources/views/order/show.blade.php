@@ -3,16 +3,16 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-4 d-flex flex-column justify-content-center">
-            <h2>Order ID: {{ $viewData['order']->getId() }}</h2>
-            <p><strong>Payment:</strong> {{ $viewData['order']->getPayment() }}</p>
-            <p><strong>Description:</strong> {{ $viewData['order']->getDescription() ?? 'There is no description for this order' }}</p>
-            <h4>Purchased drugs:</h4>
+            <h2>{{ __('Order ID') }}: {{ $viewData['order']->getId() }}</h2>
+            <p><strong>{{ __('Payment') }}:</strong> {{ $viewData['order']->getPayment() }}</p>
+            <p><strong>{{ __('Description') }}:</strong> {{ $viewData['order']->getDescription() ?? __('There is no description for this order') }}</p>
+            <h4>{{ __('Purchased drugs') }}:</h4>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Drug</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
+                        <th>{{ __('Drug') }}</th>
+                        <th>{{ __('Quantity') }}</th>
+                        <th>{{ __('Total') }}</th>
                     </tr>
                 </thead>
                 <tbody>
