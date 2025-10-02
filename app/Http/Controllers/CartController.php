@@ -36,10 +36,6 @@ class CartController extends Controller
         $items = Item::whereIn('id', $cartItemIds)->get();
         $existingItem = $items->firstWhere('drug_id', $drug->getId());
 
-        $itemsInCart = Item::whereIn('id', $cartItemIds)->get();
-
-        $existingItem = $itemsInCart->firstWhere('drug_id', $drug->getId());
-
         if ($existingItem) {
             $existingItem->setQuantity($existingItem->getQuantity() + $quantity);
             $existingItem->setTotal($existingItem->getQuantity() * $drug->getPrice());
