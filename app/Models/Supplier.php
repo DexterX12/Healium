@@ -14,11 +14,14 @@ use Illuminate\Support\Collection;
 class Supplier extends Model
 {
     /**
-     * PRODUCT ATTRIBUTES
+     * SUPPLIER ATTRIBUTES
      * $this->attributes['id'] - int - contains the supplier primary key (id)
      * $this->attributes['name'] - string - contains the supplier name
      * $this->attributes['email'] - string - contains the supplier email
      * $this->attributes['address'] - string - contains the supplier address
+     * $this->attributes['created_at'] - timestamp - contains the supplier creation date
+     * $this->attributes['updated_at'] - timestamp - contains the supplier update date
+     * RELATIONSHIPS
      * $this->drugs - drugs[] - contains a list of associated drugs
      */
     protected $fillable = [
@@ -56,12 +59,12 @@ class Supplier extends Model
         return $this->attributes['address'];
     }
 
-    public function getCreatedAtTimestamp(): string
+    public function getCreatedAt(): string
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAtTimestamp(): string
+    public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
     }
@@ -89,16 +92,6 @@ class Supplier extends Model
         $this->attributes['address'] = $address;
     }
 
-    public function setCreatedAtTimestamp(Carbon $createdAt): void
-    {
-        $this->attributes['created_at'] = $createdAt;
-    }
-
-    public function setUpdatedAtTimestamp(Carbon $updatedAt): void
-    {
-        $this->attributes['updated_at'] = $updatedAt;
-    }
-
     public function setDrugs(Collection $drugs): void
     {
         $this->attributes['drugs'] = $drugs;
@@ -112,6 +105,10 @@ class Supplier extends Model
         return validator($supplierDataValidated, static::$rules)->validate();
     }
 
+    
+    /*
+     * RELATIONSHIPS
+    */
     public function drugs(): HasMany
     {
         return $this->hasMany(Drug::class);

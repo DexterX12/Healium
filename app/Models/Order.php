@@ -20,7 +20,6 @@ class Order extends Model
      * $this->attributes['payment'] - string - contains the payment method used in the order
      * $this->attributes['created_at'] - timestamp - contains the order creation date
      * $this->attributes['updated_at'] - timestamp - contains the order update date
-     *
      * RELATIONSHIPS
      * $this->user - User - the user who created the order (N:1)
      * $this->items - Item[] - the list of items belonging to the order (1:N)
@@ -37,7 +36,9 @@ class Order extends Model
         'payment' => 'required|string|in:cash,card',
     ];
 
-    /* GETTERS */
+    /*
+     * GETTERS
+    */
 
     public function getId(): int
     {
@@ -49,12 +50,12 @@ class Order extends Model
         return $this->attributes['user_id'];
     }
 
-    public function getCreatedAtTimestamp(): string
+    public function getCreatedAt(): string
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAtTimestamp(): string
+    public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
     }
@@ -69,7 +70,9 @@ class Order extends Model
         return $this->attributes['payment'];
     }
 
-    /* SETTERS */
+    /*
+     * SETTERS
+    */
 
     public function setUserId(int $userId): void
     {
@@ -86,10 +89,8 @@ class Order extends Model
         $this->attributes['payment'] = $payment;
     }
 
-    /** OTHERS FUNCTIONS */
-
     /*
-    VALIDATIONS
+     * VALIDATIONS
     */
 
     public static function validate(array $orderData): array
@@ -97,7 +98,9 @@ class Order extends Model
         return validator($orderData, static::$rules)->validate();
     }
 
-    /** RELATIONSHIPS*/
+    /*
+     * RELATIONSHIPS
+    */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

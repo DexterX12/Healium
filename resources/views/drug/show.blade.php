@@ -65,7 +65,7 @@
                         @else
                             By: {{ __('Anonymous') }}
                         @endif
-                        on {{ $comment->getCreatedAtTimestamp() }}
+                        on {{ $comment->getCreatedAt() }}
                     </small>
                     @if(auth()->check() && method_exists($comment, 'user') && $comment->user() && auth()->id() === $comment->user->getId())
                         <form action="{{ route('comment.delete', ['id' => $comment->getId()]) }}" method="POST" class="d-inline ms-2">

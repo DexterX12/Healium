@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class Drug extends Model
 {
     /**
-     * PRODUCT ATTRIBUTES
+     * DRUG ATTRIBUTES
      * $this->attributes['id'] - int - contains the drug primary key (id)
      * $this->attributes['supplier_id'] - int - contains the supplier associated to the drug
      * $this->attributes['name'] - string - contains the drug name
@@ -29,6 +29,7 @@ class Drug extends Model
      * $this->attributes['img_path'] - string - contains the drug image path
      * $this->attributes['created_at'] - timestamp - contains the drug creation date
      * $this->attributes['updated_at'] - timestamp - contains the drug update date
+     * RELATIONSHIPS
      * $this->items - Item[] - contains the associated items
      * $this->supplier - Supplier - contains the associated supplier
      * $this->comments - Comment - contains the associated comments
@@ -100,12 +101,12 @@ class Drug extends Model
         return $this->attributes['stock'];
     }
 
-    public function getCreatedAtTimestamp(): Carbon
+    public function getCreatedAt(): Carbon
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAtTimestamp(): Carbon
+    public function getUpdatedAt(): Carbon
     {
         return $this->attributes['updated_at'];
     }
@@ -147,16 +148,6 @@ class Drug extends Model
     public function setCategory(string $category): void
     {
         $this->attributes['category'] = $category;
-    }
-
-    public function setCreatedAtTimestamp(Carbon $createdAt): void
-    {
-        $this->attributes['created_at'] = $createdAt;
-    }
-
-    public function setUpdatedAtTimestamp(Carbon $updatedAt): void
-    {
-        $this->attributes['created_at'] = $updatedAt;
     }
 
     public function setChemicalDetails(string $chemicalDetails): void
@@ -207,7 +198,9 @@ class Drug extends Model
         return validator($drugDataValidated, static::$rules)->validate();
     }
 
-    /**RELATIONSHIPS */
+    /*
+     * RELATIONSHIPS
+    */
 
     public function supplier(): BelongsTo
     {
@@ -228,7 +221,7 @@ class Drug extends Model
 
     /*
      * ADDITIONAL FUNCTIONS
-     */
+    */
 
     public static function searchByName(string $name): Collection
     {

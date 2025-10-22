@@ -10,7 +10,7 @@
 						<div class="card-body text-center">
 							<h5 class="card-title fw-semibold">{{ __('Order ID') }}: {{ $order->getId()}}</h5>
 							<div class="mt-2">
-								<span class="fw-bold">{{ __('Creation date') }}: {{ $order->getCreatedAtTimestamp() }}</span>
+								<span class="fw-bold">{{ __('Creation date') }}: {{ $order->getCreatedAt() }}</span>
 							</div>
 						</div>
 					</div>

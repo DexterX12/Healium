@@ -30,7 +30,7 @@ class User extends Authenticatable
      * $this->attributes['is_admin'] - bool - contains if the user is an admin or not
      * $this->attributes['created_at'] - timestamp - contains the user creation date
      * $this->attributes['updated_at'] - timestamp - contains the user update date
-
+     * RELATIONSHIPS
      * $this->orders - Order[] - contains the user's associated product orders
      * $this->comments - Comment[] - contains the user's associated comments
      **/
@@ -69,7 +69,9 @@ class User extends Authenticatable
         ];
     }
 
-    /* GETTERS */
+    /*
+     * GETTERS
+    */
 
     public function getId(): int
     {
@@ -116,7 +118,9 @@ class User extends Authenticatable
         return $this->comments;
     }
 
-    /* SETTERS */
+    /*
+     * SETTERS
+    */
 
     public function setId(int $id): void
     {
@@ -143,16 +147,6 @@ class User extends Authenticatable
         $this->attributes['is_admin'] = $adminStatus;
     }
 
-    public function setCreatedAtTimestamp(Carbon $createdAt): void
-    {
-        $this->attributes['created_at'] = $createdAt;
-    }
-
-    public function setUpdatedAtTimestamp(Carbon $updatedAt): void
-    {
-        $this->attributes['updated_at'] = $updatedAt;
-    }
-
     public function setOrders(Collection $orders): void
     {
         $this->orders = $orders;
@@ -163,7 +157,10 @@ class User extends Authenticatable
         $this->comments = $comments;
     }
 
-    /* RELATIONSHIPS */
+    /*
+     * RELATIONSHIPS
+    */
+
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
