@@ -65,6 +65,16 @@ class Comment extends Model
         return $this->attributes['updated_at'];
     }
 
+    public function getDrug(): Drug
+    {
+        return $this->drug;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
     /*
      * SETTERS
     */

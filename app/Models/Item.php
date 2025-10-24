@@ -78,12 +78,12 @@ class Item extends Model
         return $this->order;
     }
 
-    public function getCreatedAt(): Carbon
+    public function getCreatedAt(): String
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAt(): Carbon
+    public function getUpdatedAt(): String
     {
         return $this->attributes['updated_at'];
     }

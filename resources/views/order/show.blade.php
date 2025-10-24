@@ -18,7 +18,7 @@
                 <tbody>
                     @foreach($viewData['items'] as $item)
                         <tr>
-                            <td>{{ $item->drug->getName() }}</td>
+                            <td>{{ $item->getDrug()->getName() }}</td>
                             <td>{{ $item->getQuantity() }}</td>
                             <td>${{ number_format($item->getTotal(), 2) }}</td>
                         </tr>
