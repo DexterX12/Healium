@@ -70,6 +70,16 @@ class Order extends Model
         return $this->attributes['payment'];
     }
 
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
+
     /*
      * SETTERS
     */

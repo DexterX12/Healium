@@ -101,12 +101,12 @@ class Drug extends Model
         return $this->attributes['stock'];
     }
 
-    public function getCreatedAt(): Carbon
+    public function getCreatedAt(): String
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAt(): Carbon
+    public function getUpdatedAt(): String
     {
         return $this->attributes['updated_at'];
     }
