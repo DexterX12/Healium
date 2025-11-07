@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class Drug extends Model
 {
     /**
-     * PRODUCT ATTRIBUTES
+     * DRUG ATTRIBUTES
      * $this->attributes['id'] - int - contains the drug primary key (id)
      * $this->attributes['supplier_id'] - int - contains the supplier associated to the drug
      * $this->attributes['name'] - string - contains the drug name
@@ -25,9 +25,11 @@ class Drug extends Model
      * $this->attributes['chemical_details'] - string - contains the drug quimic details
      * $this->attributes['keywords'] - string - contains the drug keywords
      * $this->attributes['price'] - int- contains the drug price
+     * $this->attributes['stock'] - int - contains the drug stock
      * $this->attributes['img_path'] - string - contains the drug image path
      * $this->attributes['created_at'] - timestamp - contains the drug creation date
      * $this->attributes['updated_at'] - timestamp - contains the drug update date
+     * RELATIONSHIPS
      * $this->items - Item[] - contains the associated items
      * $this->supplier - Supplier - contains the associated supplier
      * $this->comments - Comment - contains the associated comments
@@ -41,6 +43,7 @@ class Drug extends Model
         'keywords',
         'price',
         'img_path',
+        'stock',
     ];
 
     public static array $rules = [
@@ -52,6 +55,7 @@ class Drug extends Model
         'keywords' => 'required|string|max:255',
         'price' => 'required|numeric|min:0',
         'img_path' => 'nullable|string|max:255',
+        'stock' => 'required|integer|min:0',
     ];
 
     /*
@@ -92,12 +96,17 @@ class Drug extends Model
         return $this->attributes['price'];
     }
 
-    public function getCreatedAtTimestamp(): Carbon
+    public function getStock(): int
+    {
+        return $this->attributes['stock'];
+    }
+
+    public function getCreatedAt(): String
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAtTimestamp(): Carbon
+    public function getUpdatedAt(): String
     {
         return $this->attributes['updated_at'];
     }
@@ -141,16 +150,6 @@ class Drug extends Model
         $this->attributes['category'] = $category;
     }
 
-    public function setCreatedAtTimestamp(Carbon $createdAt): void
-    {
-        $this->attributes['created_at'] = $createdAt;
-    }
-
-    public function setUpdatedAtTimestamp(Carbon $updatedAt): void
-    {
-        $this->attributes['created_at'] = $updatedAt;
-    }
-
     public function setChemicalDetails(string $chemicalDetails): void
     {
         $this->attributes['chemical_details'] = $chemicalDetails;
@@ -164,6 +163,11 @@ class Drug extends Model
     public function setPrice(int $price): void
     {
         $this->attributes['price'] = $price;
+    }
+
+    public function setStock(int $stock): void
+    {
+        $this->attributes['stock'] = $stock;
     }
 
     public function setSupplierId(int $id): void
@@ -194,7 +198,9 @@ class Drug extends Model
         return validator($drugDataValidated, static::$rules)->validate();
     }
 
-    /**RELATIONSHIPS */
+    /*
+     * RELATIONSHIPS
+    */
 
     public function supplier(): BelongsTo
     {
@@ -212,6 +218,10 @@ class Drug extends Model
         return $this->hasMany(Comment::class);
 
     }
+
+    /*
+     * ADDITIONAL FUNCTIONS
+    */
 
     public static function searchByName(string $name): Collection
     {
@@ -237,5 +247,17 @@ class Drug extends Model
             ->orderBy('total_sold', 'desc')
             ->limit($limit)
             ->get();
+    }
+
+    public function updateStock(int $quantity): bool
+    {
+        if ($this->getStock() >= $quantity) {
+            $this->setStock($this->getStock() - $quantity);
+            $this->save();
+
+            return true;
+        }
+
+        return false;
     }
 }

@@ -1,4 +1,10 @@
 # Healium - Laravel Project
+## Members
+- Darieth Farid Sánchez Velásquez
+- Miguel Ángel Cano Salinas
+- Delvin José Rodríguez Jimenez
+
+---
 
 ## Description
 **Healium** is a web application that functions as an online pharmacy.  
@@ -24,7 +30,6 @@ Clone the repository and install dependencies:
 git clone https://github.com/DexterX12/Healium.git
 cd healium
 composer install
-npm install && npm run dev
 ```
 
 ### Set up your enviroment file
@@ -40,6 +45,11 @@ DB_PASSWORD=
 ### Generate the application key
 ```bash
 php artisan key:generate
+```
+
+### Link the storage to save images
+```bash
+php artisan storage:link
 ```
 ### Run migrations and sedd the database
 ```bash
@@ -67,7 +77,7 @@ Access the application at: http://127.0.0.1:8000
 
 - **Product comments** → View and leave comments on items.
 
-### Admin Workflow
+### Admin Workflow (** is assigned manually in database **)
 
 Access the admin panel at: http://127.0.0.1:8000/admin/index
 

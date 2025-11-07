@@ -17,7 +17,8 @@ class Comment extends Model
      * $this->attributes['drug_id'] - int - contains the drug id associated to the comment
      * $this->attributes['user_id'] - int - contains the user id associated to the comment
      * $this->attributes['description'] - string - contains the comment description
-     *
+     * $this->attributes['created_at'] - timestamp - contains the drug creation date
+     * $this->attributes['updated_at'] - timestamp - contains the drug update date
      * RELATIONSHIPS
      * $this->drug - Drug - contains the associated Drug
      * $this->user - User - contains the associated user
@@ -30,7 +31,10 @@ class Comment extends Model
         'user_id' => 'required|exists:users,id',
     ];
 
-    /** GETTERS */
+    /*
+     * GETTERS
+    */
+
     public function getId(): int
     {
         return $this->attributes['id'];
@@ -51,17 +55,29 @@ class Comment extends Model
         return $this->attributes['drug_id'];
     }
 
-    public function getCreatedAtTimestamp(): string
+    public function getCreatedAt(): string
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAtTimestamp(): string
+    public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
     }
 
-    /**SETTERS */
+    public function getDrug(): Drug
+    {
+        return $this->drug;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /*
+     * SETTERS
+    */
 
     public function setDescription(string $desc): void
     {
@@ -78,17 +94,10 @@ class Comment extends Model
         $this->attributes['user_id'] = $pId;
     }
 
-    public function setCreatedAtTimestamp(string $createdAt): void
-    {
-        $this->attributes['created_at'] = $createdAt;
-    }
+    /*
+     * RELATIONSHIPS
+    */
 
-    public function setUpdatedAtTimestamp(string $updatedAt): void
-    {
-        $this->attributes['updated_at'] = $updatedAt;
-    }
-
-    /** RELATIONSHIPS */
     public function drug(): BelongsTo
     {
         return $this->belongsTo(Drug::class);
@@ -98,7 +107,10 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
-    /* VALIDATIONS */
+    
+    /*
+     * VALIDATIONS
+    */
 
     public static function validate(array $commentData): array
     {

@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
         ->name('cart.add');
 
     Route::delete('/cart/remove/{id}', 'App\Http\Controllers\CartController@remove')
-    ->name('cart.remove');
+        ->name('cart.remove');
 
     Route::delete('cart/removeAll', 'App\Http\Controllers\CartController@removeAll')
         ->name('cart.removeAll');

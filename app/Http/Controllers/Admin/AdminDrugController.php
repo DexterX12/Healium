@@ -45,7 +45,7 @@ class AdminDrugController extends Controller
         if ($suppliers->count() < 1) {
             return redirect()
                 ->route('admin.drug.index')
-                ->with('error', 'There are no suppliers stored. Please add suppliers before creating a new drug.');
+                ->with('error', __('There are no suppliers stored. Please add suppliers before creating a new drug.'));
         }
 
         return view('admin.drug.create')->with('viewData', $viewData);
@@ -66,7 +66,7 @@ class AdminDrugController extends Controller
 
         return redirect()
             ->route('admin.drug.index')
-            ->with('success', 'Drug created successfully.');
+            ->with('success', __('Drug created successfully.'));
     }
 
     public function update(Request $request): RedirectResponse
@@ -85,7 +85,7 @@ class AdminDrugController extends Controller
 
         return redirect()
             ->route('admin.drug.index')
-            ->with('success', 'Drug created successfully.');
+            ->with('success', __('Drug updated successfully.'));
     }
 
     public function delete(int $id): RedirectResponse
@@ -95,6 +95,6 @@ class AdminDrugController extends Controller
 
         return redirect()
             ->route('drug.index')
-            ->with('success', 'Drug deleted successfully.');
+            ->with('success', __('Drug deleted successfully.'));
     }
 }

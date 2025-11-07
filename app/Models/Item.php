@@ -21,6 +21,7 @@ class Item extends Model
      * $this->attirbutes['total'] - int - contains the total of the order
      * $this->attributes['created_at'] - timestamp - contains the item creation date
      * $this->attributes['updated_at'] - timestamp - contains the item update date
+     * RELATIONSHIPS
      * this->drug - Drug - contains the associated drug
      * this->order - Order - contains the associated order
      **/
@@ -31,14 +32,16 @@ class Item extends Model
         'total',
     ];
 
-    /* GETTERS */
-
     public static array $rules = [
         'drug_id' => 'required|exists:drugs,id',
         'order_id' => 'nullable|exists:orders,id',
         'quantity' => 'required|numeric|gt:0',
         'total' => 'required|numeric|gt:0',
     ];
+
+    /*
+     * GETTERS
+    */
 
     public function getId(): int
     {
@@ -75,17 +78,19 @@ class Item extends Model
         return $this->order;
     }
 
-    public function getCreatedAtTimestamp(): Carbon
+    public function getCreatedAt(): String
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAtTimestamp(): Carbon
+    public function getUpdatedAt(): String
     {
         return $this->attributes['updated_at'];
     }
 
-    /* SETTERS */
+    /*
+     * SETTERS
+    */
 
     public function setId(int $id): void
     {
@@ -122,18 +127,8 @@ class Item extends Model
         $this->order = $order;
     }
 
-    public function setCreatedAtTimestamp(Carbon $createdAt): void
-    {
-        $this->attributes['created_at'] = $createdAt;
-    }
-
-    public function setUpdatedAtTimestamp(Carbon $updatedAt): void
-    {
-        $this->attributes['created_at'] = $updatedAt;
-    }
-
     /*
-    VALIDATIONS
+     * VALIDATIONS
     */
 
     public static function validate(array $itemData): array
@@ -143,7 +138,7 @@ class Item extends Model
 
     /*
      * RELATIONSHIPS
-     */
+    */
 
     public function order(): BelongsTo
     {

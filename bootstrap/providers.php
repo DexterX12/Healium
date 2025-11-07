@@ -5,6 +5,6 @@
 */
 return [
     App\Providers\AppServiceProvider::class,
-    App\Providers\ViewServiceProvider::class,
+    App\Providers\CartViewServiceProvider::class,
     App\Providers\ImageServiceProvider::class,
 ];

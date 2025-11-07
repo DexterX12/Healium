@@ -20,18 +20,18 @@ class CommentController extends Controller
         Comment::create($commentDataValidated);
 
         return back()
-            ->with('success', 'Comment created successfully');
+            ->with('success', __('Comment created successfully'));
     }
 
     public function delete(int $id): RedirectResponse
     {
         $commentToDelete = Comment::findOrFail($id);
         if ($commentToDelete->getUserId() !== auth()->id()) {
-            return back()->with('error', 'You are not allowed to delete this comment');
+            return back()->with('error', __('You are not allowed to delete this comment'));
         }
         $commentToDelete->delete();
 
         return back()
-            ->with('success', 'Comment deleted successfully');
+            ->with('success', __('Comment deleted successfully'));
     }
 }
