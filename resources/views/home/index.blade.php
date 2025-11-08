@@ -3,12 +3,12 @@
 <header class="bg-light py-5">
   <div class="container text-center">
     <h1 class="display-4 fw-bold text-primary">{{__('Welcome to Healium')}}</h1>
-    <p class="lead text-secondary">{{__('Your trusted drug store for health and wellness')}}</p>
+  <p class="lead text-secondary">{{ __('Your trusted drug store for health and wellness') }}</p>
   </div>
 </header>
 
 <section class="container my-5">
-  <h2 class="mb-4 text-center fw-semibold">{{__('New Products') }}</h2>
+  <h2 class="mb-4 text-center fw-semibold">{{ __('New Products') }}</h2>
   <div id="drugCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       @foreach($viewData['drugs']->chunk(3) as $chunkIndex => $drugsChunk)
