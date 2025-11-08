@@ -24,7 +24,7 @@
 				<a href="{{route('drug.show', ['id' => $drug->getId()])}}" class="text-decoration-none">
 					<div class="card h-100 shadow-sm">
 						@if($drug->getImage())
-							<img src="{{ asset('/storage/'.$drug->getImage()) }}" class="card-img-top" alt="{{ $drug->getName() }}" style="object-fit:cover;height:250px;">
+							<img src="{{ $drug->getImage() }}" class="card-img-top" alt="{{ $drug->getName() }}" style="object-fit:cover;height:250px;">
 						@endif
 						<div class="card-body text-center">
 							<h5 class="card-title fw-semibold">{{ $drug->getName()}}</h5>

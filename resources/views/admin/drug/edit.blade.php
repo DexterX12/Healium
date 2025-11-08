@@ -47,7 +47,7 @@
         <label for="image" class="form-label">{{ __('Drug Image') }}</label>
         @if($viewData['drug']->getImage())
           <div class="mb-2">
-            <img src="{{ asset('storage/' . $viewData['drug']->getImage()) }}" alt="{{ __('Drug Image') }}" style="max-width: 200px;">
+            <img src="{{ $viewData['drug']->getImage() }}" alt="{{ __('Drug Image') }}" style="max-width: 200px;">
           </div>
         @endif
         <input type="file" class="form-control" id="image" name="image" accept="image/*">

@@ -19,7 +19,7 @@
                 <a href="{{ route('drug.show', ['id' => $drug->getId()]) }}" class="text-decoration-none text-dark">
                   <div class="card shadow-sm">
                     @if($drug->getImage())
-                      <img src="{{ asset('/storage/'.$drug->getImage()) }}" class="card-img-top" alt="{{ $drug->getName() }}">
+                      <img src="{{ $drug->getImage() }}" class="card-img-top" alt="{{ $drug->getName() }}">
                     @endif
                     <div class="card-body">
                       <h5 class="card-title">{{ $drug->getName() }}</h5>
