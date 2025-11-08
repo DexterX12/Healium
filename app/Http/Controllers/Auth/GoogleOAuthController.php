@@ -1,7 +1,7 @@
 <?php
 
 /*
-* Author: Miguel Salinas
+* Author: Delvin R.
 */
 
 namespace App\Http\Controllers\Auth;
