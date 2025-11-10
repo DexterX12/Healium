@@ -56,7 +56,13 @@ class AdminDrugController extends Controller
         $drugDataValidated = Drug::validate($request->all());
         $newDrug = Drug::create($drugDataValidated);
 
-        $imageStorage = app(ImageStorage::class);
+        // Selección dinámica de almacenamiento
+        $storageType = $request->input('storage_type', 'local');
+        if ($storageType === 'gcp') {
+            $imageStorage = app(\App\Util\ImageGCPStorage::class);
+        } else {
+            $imageStorage = app(\App\Util\ImageLocalStorage::class);
+        }
         $imagePath = $imageStorage->store($request);
 
         if ($imagePath) {

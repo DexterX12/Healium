@@ -44,6 +44,17 @@
       <label for="image" class="form-label">{{ __('Drug Image') }}</label>
       <input type="file" class="form-control" id="image" name="image" accept="image/*">
     </div>
+    <div class="mb-3">
+      <label class="form-label">{{ __('Tipo de almacenamiento de imagen') }}</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="storage_type" id="storage_local" value="local" checked>
+        <label class="form-check-label" for="storage_local">Local</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="storage_type" id="storage_gcp" value="gcp">
+        <label class="form-check-label" for="storage_gcp">Google Cloud Storage</label>
+      </div>
+    </div>
     <button type="submit" class="btn btn-primary">{{ __('Add drug') }}</button>
   </form>
 </div>
