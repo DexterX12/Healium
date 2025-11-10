@@ -19,6 +19,7 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link active" href="{{ route('home.index') }}">{{ __('Home') }}</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('drug.index') }}">{{ __('Products') }}</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('partner.index') }}">{{ __('Partner') }}</a></li>
           @guest
             <li><a class="nav-link active" href="{{ route('login') }}">{{ __('Login')}}</a></li>
             <li><a class="nav-link active" href="{{ route('register') }}">{{ __('Register')}}</a></li>
