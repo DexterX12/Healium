@@ -13,6 +13,9 @@ Route::get('/', 'App\Http\Controllers\HomeController@index')
 Route::get('drug/index', 'App\Http\Controllers\DrugController@index')
     ->name('drug.index');
 
+Route::get('/partner/index', 'App\Http\Controllers\PartnerProductController@index')
+    ->name('partner.index');
+    
 Route::get('drug/show/{id}', 'App\Http\Controllers\DrugController@show')
     ->name('drug.show');
 
