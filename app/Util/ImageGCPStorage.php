@@ -30,7 +30,6 @@ class ImageGCPStorage implements ImageStorage
             fopen($imageFile->getRealPath(), 'r'),
             [
                 'name' => $fileName,
-                'predefinedAcl' => 'publicRead',
             ]
         );
 

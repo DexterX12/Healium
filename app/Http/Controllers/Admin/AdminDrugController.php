@@ -7,9 +7,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\ImageStorage;
 use App\Models\Drug;
 use App\Models\Supplier;
-use App\Util\ImageLocalStorage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -58,11 +58,7 @@ class AdminDrugController extends Controller
 
         // Selección dinámica de almacenamiento
         $storageType = $request->input('storage_type', 'local');
-        if ($storageType === 'gcp') {
-            $imageStorage = app(\App\Util\ImageGCPStorage::class);
-        } else {
-            $imageStorage = app(\App\Util\ImageLocalStorage::class);
-        }
+        $imageStorage = app(ImageStorage::class, ['storage' => $storageType]);
         $imagePath = $imageStorage->store($request);
 
         if ($imagePath) {
@@ -81,7 +77,8 @@ class AdminDrugController extends Controller
         $drugToUpdate = Drug::findOrFail($request->input('id'));
         $drugToUpdate->fill($drugDataValidated);
 
-        $imageStorage = app(ImageLocalStorage::class);
+        $storageType = $request->input('storage_type', 'local');
+        $imageStorage = app(ImageStorage::class, ['storage' => $storageType]);
         $imagePath = $imageStorage->store($request);
 
         if ($imagePath) {
