@@ -2,13 +2,12 @@ version: '3.8'
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: laravel_app
-    restart: always
+    image: dexterx11/healium:latest
     ports:
-      - "80:80"
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: ingress
     environment:
       APP_ENV: ${APP_ENV}
       APP_DEBUG: ${APP_DEBUG}
@@ -24,7 +23,7 @@ services:
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
       GOOGLE_REDIRECT_URI: ${GOOGLE_REDIRECT_URI}
       GOOGLE_CALLBACK_URI: ${GOOGLE_CALLBACK_URI}
-      GOOGLE_APPLICATION_CREDENTIALS: /var/www/html/credentials/credentials.json
+      GOOGLE_APPLICATION_CREDENTIALS: /var/www/html/credentials/gcp-credentials.json
       GCP_STORAGE_BUCKET: ${GCP_STORAGE_BUCKET}
     volumes:
       - .:/var/www/html
@@ -32,15 +31,9 @@ services:
       - /opt/secrets/google:/var/www/html/credentials:ro
     deploy:
       mode: replicated
-      replicas: 8
-      placement:
-        constraints:
-          - node.role == worker
+      replicas: 2
+      # placement:
+      #   constraints:
+      #     - node.role == worker
       restart_policy:
         condition: on-failure
-    networks:
-      - laravel_net
-
-networks:
-  laravel_net:
-    driver: overlay
