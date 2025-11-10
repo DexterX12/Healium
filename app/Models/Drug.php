@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class Drug extends Model
 {
@@ -118,7 +119,12 @@ class Drug extends Model
 
     public function getImage(): ?string
     {
-        return $this->attributes['img_path'];
+        $image_path = $this->attributes['img_path'];
+
+        if (Str::isUrl($image_path))
+            return $image_path;
+        
+        return url('/storage/'.$image_path);
     }
 
     public function getSupplier(): Supplier

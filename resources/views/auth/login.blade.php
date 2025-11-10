@@ -66,10 +66,18 @@
                 @endif
               </div>
             </div>
+
+            <div class="d-flex justify-content-center mt-3">
+              <a href="{{ env('GOOGLE_REDIRECT_URI') }}">
+                <img src="/gsignin.png" alt="Google Sign In">
+              </a>
+            </div>
+
           </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+<script src="https://accounts.google.com/gsi/client" async></script>
 @endsection

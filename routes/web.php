@@ -3,6 +3,7 @@
 /*
 * Author: Miguel Salinas - Delvin - Darieth
 */
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -12,8 +13,19 @@ Route::get('/', 'App\Http\Controllers\HomeController@index')
 Route::get('drug/index', 'App\Http\Controllers\DrugController@index')
     ->name('drug.index');
 
+Route::get('/partner/index', 'App\Http\Controllers\PartnerProductController@index')
+    ->name('partner.index');
+    
 Route::get('drug/show/{id}', 'App\Http\Controllers\DrugController@show')
     ->name('drug.show');
+
+
+Route::get('/google-auth/redirect', 'App\Http\Controllers\Auth\GoogleOAuthController@redirect')
+    ->name('auth.google.redirect');
+
+Route::get('/google-auth/callback', 'App\Http\Controllers\Auth\GoogleOAuthController@callback')
+    ->name('auth.google.callback');
+
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/index', 'App\Http\Controllers\Admin\AdminHomeController@index')

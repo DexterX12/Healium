@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-8 d-flex align-items-center justify-content-center">
       @if($viewData['drug']->getImage())
-        <img src="{{ asset('/storage/'.$viewData['drug']->getImage()) }}" alt="{{ $viewData['drug']->getName() }}" class="img-fluid rounded shadow">
+        <img src="{{ $viewData['drug']->getImage() }}" alt="{{ $viewData['drug']->getName() }}" class="img-fluid rounded shadow">
       @endif
     </div>
     <div class="col-md-4 d-flex flex-column justify-content-center">

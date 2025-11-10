@@ -41,16 +41,27 @@
       </div>
       <div class="mb-3">
         <label for="price" class="form-label">{{ __('Stock') }}</label>
-        <input type="number" step="1" class="form-control" id="stock" name="stock" required>
+        <input type="number" step="1" class="form-control" id="stock" name="stock" value="{{ $viewData['drug']->getStock() }}" required>
       </div>
       <div class="mb-3">
         <label for="image" class="form-label">{{ __('Drug Image') }}</label>
         @if($viewData['drug']->getImage())
-          <div class="mb-2">
-            <img src="{{ asset('storage/' . $viewData['drug']->getImage()) }}" alt="{{ __('Drug Image') }}" style="max-width: 200px;">
+          <div class="mb-3">
+            <img src="{{ $viewData['drug']->getImage() }}" alt="{{ __('Drug Image') }}" style="max-width: 200px;">
           </div>
         @endif
-        <input type="file" class="form-control" id="image" name="image" accept="image/*">
+          <input type="file" class="form-control" id="image" name="image" accept="image/*">
+          <div class="mb-3">
+            <label class="form-label">{{ __('Tipo de almacenamiento de imagen') }}</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="storage_type" id="storage_local" value="local" checked>
+              <label class="form-check-label" for="storage_local">Local</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="storage_type" id="storage_gcp" value="gcp">
+              <label class="form-check-label" for="storage_gcp">Google Cloud Storage</label>
+            </div>
+          </div>
       </div>
       <button type="submit" class="btn btn-primary">{{ __('Update Drug') }}</button>
   </form>

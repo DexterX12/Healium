@@ -56,7 +56,9 @@ class AdminDrugController extends Controller
         $drugDataValidated = Drug::validate($request->all());
         $newDrug = Drug::create($drugDataValidated);
 
-        $imageStorage = app(ImageStorage::class);
+        // Selección dinámica de almacenamiento
+        $storageType = $request->input('storage_type', 'local');
+        $imageStorage = app(ImageStorage::class, ['storage' => $storageType]);
         $imagePath = $imageStorage->store($request);
 
         if ($imagePath) {
@@ -75,7 +77,8 @@ class AdminDrugController extends Controller
         $drugToUpdate = Drug::findOrFail($request->input('id'));
         $drugToUpdate->fill($drugDataValidated);
 
-        $imageStorage = app(ImageStorage::class);
+        $storageType = $request->input('storage_type', 'local');
+        $imageStorage = app(ImageStorage::class, ['storage' => $storageType]);
         $imagePath = $imageStorage->store($request);
 
         if ($imagePath) {
