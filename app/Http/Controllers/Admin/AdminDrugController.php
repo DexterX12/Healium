@@ -7,9 +7,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Interfaces\ImageStorage;
 use App\Models\Drug;
 use App\Models\Supplier;
+use App\Util\ImageLocalStorage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -81,7 +81,7 @@ class AdminDrugController extends Controller
         $drugToUpdate = Drug::findOrFail($request->input('id'));
         $drugToUpdate->fill($drugDataValidated);
 
-        $imageStorage = app(ImageStorage::class);
+        $imageStorage = app(ImageLocalStorage::class);
         $imagePath = $imageStorage->store($request);
 
         if ($imagePath) {

@@ -124,7 +124,7 @@ class Drug extends Model
         if (Str::isUrl($image_path))
             return $image_path;
         
-        return url('/'.$image_path);
+        return url('/storage/'.$image_path);
     }
 
     public function getSupplier(): Supplier

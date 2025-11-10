@@ -47,9 +47,10 @@
         <label for="image" class="form-label">{{ __('Drug Image') }}</label>
         @if($viewData['drug']->getImage())
           <div class="mb-3">
-            <label for="image" class="form-label">{{ __('Drug Image') }}</label>
-            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+            <img src="{{ $viewData['drug']->getImage() }}" alt="{{ __('Drug Image') }}" style="max-width: 200px;">
           </div>
+        @endif
+          <input type="file" class="form-control" id="image" name="image" accept="image/*">
           <div class="mb-3">
             <label class="form-label">{{ __('Tipo de almacenamiento de imagen') }}</label>
             <div class="form-check">
@@ -61,7 +62,6 @@
               <label class="form-check-label" for="storage_gcp">Google Cloud Storage</label>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">{{ __('Update drug') }}</button>
       </div>
       <button type="submit" class="btn btn-primary">{{ __('Update Drug') }}</button>
   </form>
