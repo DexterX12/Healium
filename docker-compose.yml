@@ -24,8 +24,23 @@ services:
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
       GOOGLE_REDIRECT_URI: ${GOOGLE_REDIRECT_URI}
       GOOGLE_CALLBACK_URI: ${GOOGLE_CALLBACK_URI}
-      GOOGLE_APPLICATION_CREDENTIALS: ${GOOGLE_APPLICATION_CREDENTIALS}
+      GOOGLE_APPLICATION_CREDENTIALS: /var/www/html/credentials/credentials.json
       GCP_STORAGE_BUCKET: ${GCP_STORAGE_BUCKET}
     volumes:
       - .:/var/www/html
       - ./storage:/var/www/html/storage
+      - /opt/secrets/google:/var/www/html/credentials:ro
+    deploy:
+      mode: replicated
+      replicas: 8
+      placement:
+        constraints:
+          - node.role == worker
+      restart_policy:
+        condition: on-failure
+    networks:
+      - laravel_net
+
+networks:
+  laravel_net:
+    driver: overlay
