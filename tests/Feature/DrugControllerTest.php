@@ -50,4 +50,35 @@ class DrugControllerTest extends TestCase
         Mockery::close();
         parent::tearDown();
     }
+
+    public function test_index_returns_view_with_filtered_drugs_by_name()
+    {
+        // Simulamos el modelo estático Drug::searchByName('Paracetamol')
+        $mock = \Mockery::mock('alias:App\Models\Drug');
+        $mock->shouldReceive('searchByName')
+            ->once()
+            ->with('Paracetamol')
+            ->andReturn([
+                ['id' => 1, 'name' => 'Paracetamol', 'category' => 'Antihestamines']
+            ]);
+
+        // Request simulando el query ?name=Paracetamol
+        $request = \Illuminate\Http\Request::create('/drugs', 'GET', [
+            'name' => 'Paracetamol'
+        ]);
+
+        // Ejecutamos el método
+        $controller = new \App\Http\Controllers\DrugController();
+        $response = $controller->index($request);
+
+        // Verificaciones
+        $this->assertInstanceOf(\Illuminate\View\View::class, $response);
+        $this->assertEquals('drug.index', $response->name());
+        $this->assertArrayHasKey('viewData', $response->getData());
+
+        $drugs = $response->getData()['viewData']['drugs'];
+        $this->assertCount(1, $drugs);
+        $this->assertEquals('Paracetamol', $drugs[0]['name']);
+    }
+
 }
