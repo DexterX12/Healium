@@ -10,6 +10,14 @@ use Illuminate\View\View;
 
 class DrugControllerTest extends TestCase
 {
+    protected DrugController $controller;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->controller = new DrugController();
+    }
+
     public function test_index_returns_view_with_all_drugs(): void
     {
         $mock = Mockery::mock('alias:App\Models\Drug');
@@ -17,9 +25,8 @@ class DrugControllerTest extends TestCase
 
         $request = Request::create('/drugs', 'GET');
 
-        $controller = new DrugController();
 
-        $response = $controller->index($request);
+        $response = $this->controller->index($request);
 
         $this->assertInstanceOf(View::class, $response);
         $this->assertEquals('drug.index', $response->name());
@@ -35,9 +42,8 @@ class DrugControllerTest extends TestCase
             ->with(1)
             ->andReturn(['id' => 1, 'name' => 'Aspirina']);
 
-        $controller = new DrugController();
 
-        $response = $controller->show(1);
+        $response = $this->controller->show(1);
 
         $this->assertInstanceOf(View::class, $response);
         $this->assertEquals('drug.show', $response->name());
@@ -65,8 +71,7 @@ class DrugControllerTest extends TestCase
             'name' => 'Paracetamol'
         ]);
 
-        $controller = new DrugController();
-        $response = $controller->index($request);
+        $response = $this->controller->index($request);
 
         $this->assertInstanceOf(View::class, $response);
         $this->assertEquals('drug.index', $response->name());
