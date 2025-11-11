@@ -4,10 +4,7 @@ services:
   app:
     image: dexterx11/healium:latest
     ports:
-      - target: 80
-        published: 80
-        protocol: tcp
-        mode: ingress
+      - "80:80"
     environment:
       APP_ENV: ${APP_ENV}
       APP_DEBUG: ${APP_DEBUG}
@@ -26,14 +23,10 @@ services:
       GOOGLE_APPLICATION_CREDENTIALS: /var/www/html/credentials/gcp-credentials.json
       GCP_STORAGE_BUCKET: ${GCP_STORAGE_BUCKET}
     volumes:
-      - .:/var/www/html
       - ./storage:/var/www/html/storage
       - /opt/secrets/google:/var/www/html/credentials:ro
     deploy:
       mode: replicated
-      replicas: 2
-      # placement:
-      #   constraints:
-      #     - node.role == worker
+      replicas: 9
       restart_policy:
         condition: on-failure
