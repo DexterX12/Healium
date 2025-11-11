@@ -84,5 +84,19 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   @include('cart.modal')
+<body>
+  <div id="app">
+    <div class="d-flex justify-content-end p-3">
+      <form action="{{ url('lang/set') }}" method="POST" class="d-inline">
+        @csrf
+        <button type="submit" name="lang" value="en" class="btn btn-outline-primary mx-1">
+          <i class="bi bi-translate"></i> English
+        </button>
+        <button type="submit" name="lang" value="es" class="btn btn-outline-success mx-1">
+          <i class="bi bi-translate"></i> Español
+        </button>
+      </form>
+    </div>
+    @yield('content')
+  </div>
 </body>
-</html>
