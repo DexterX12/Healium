@@ -59,9 +59,21 @@
   "You are logged in to the admin dashboard. Use the navigation menu to manage the application": "Has iniciado sesión en el panel de administración. Usa el menú de navegación para gestionar la aplicación",
   "Are you sure you want to delete this drug?": "¿Estás seguro de que deseas eliminar este medicamento?",
   "Currently listed drugs": "Medicamentos actualmente listados",
+  "Currently registered suppliers": "Proveedores actualmente listados",
   "Users registered in the system": "Usuarios registrados en el sistema",
   "Welcome, Admin!": "¡Bienvenido, Administrador!",
   "Add Drug": "Agregar medicamento",
-  "Add Supplier": "Agregar proveedor"
+  "Add Supplier": "Agregar proveedor",
+  "Address": "Dirección",
+  "Update Supplier": "Actualizar proveedor",
+  "Update supplier": "Editar proveedor",
+  "Update Drug": "Actualizar medicamento",
+  "Drug Image": "Imagen del medicamento",
+  "Stock": "Existencias",
+  "Category": "Categoría",
+  "Keywords": "Palabras clave",
+  "Chemical Details": "Detalles químicos",
+  "Drug Name": "Nombre del medicamento",
+  "Edit Drug": "Editar medicamento"
 }
 
