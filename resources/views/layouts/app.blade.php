@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +34,25 @@
       </div>
     </div>
   </nav>
+
+
+  <div id="app">
+    <div class="d-flex justify-content-end p-3">
+      <div class="card shadow-sm border-0" style="min-width: 260px;">
+        <div class="card-body py-2 px-3">
+          <form action="{{ route('set.locale', ['locale' => '']) }}" method="POST" class="d-flex justify-content-between align-items-center">
+            @csrf
+            <button type="submit" name="lang" value="en" class="btn btn-outline-primary mx-1">
+              <i class="bi bi-translate"></i> English
+            </button>
+            <button type="submit" name="lang" value="es" class="btn btn-outline-success mx-1">
+              <i class="bi bi-translate"></i> Español
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <main class="container">
@@ -82,21 +100,5 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  @include('cart.modal')
-<body>
-  <div id="app">
-    <div class="d-flex justify-content-end p-3">
-      <form action="{{ url('lang/set') }}" method="POST" class="d-inline">
-        @csrf
-        <button type="submit" name="lang" value="en" class="btn btn-outline-primary mx-1">
-          <i class="bi bi-translate"></i> English
-        </button>
-        <button type="submit" name="lang" value="es" class="btn btn-outline-success mx-1">
-          <i class="bi bi-translate"></i> Español
-        </button>
-      </form>
-    </div>
-    @yield('content')
-  </div>
 </body>
+</html>

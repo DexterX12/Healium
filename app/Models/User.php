@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Carbon;
 
 class User extends Authenticatable
 {
@@ -112,7 +111,7 @@ class User extends Authenticatable
     {
         return $this->orders;
     }
-    
+
     public function getComments(): Collection
     {
         return $this->comments;

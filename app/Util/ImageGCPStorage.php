@@ -8,22 +8,23 @@ use Google\Cloud\Storage\StorageClient;
 class ImageGCPStorage implements ImageStorage
 {
     protected $storage;
+
     protected $bucket;
 
     public function __construct()
     {
-        $this->storage = new StorageClient();
+        $this->storage = new StorageClient;
         $this->bucket = $this->storage->bucket(env('GCP_STORAGE_BUCKET'));
     }
 
     public function store($request): ?string
     {
         $imageFile = $request->file('image');
-        if (!$imageFile) {
+        if (! $imageFile) {
             return null;
         }
 
-        $fileName = uniqid() . '_' . $imageFile->getClientOriginalName();
+        $fileName = uniqid().'_'.$imageFile->getClientOriginalName();
         $bucket = $this->bucket;
 
         $bucket->upload(

@@ -6,7 +6,6 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
@@ -105,7 +104,7 @@ class Supplier extends Model
         $rules = static::$rules;
 
         // ID is present only on updates
-        if (array_key_exists("id", $supplierDataValidated)) {
+        if (array_key_exists('id', $supplierDataValidated)) {
             // Ignore email uniqueness validation.
             // It already exists because this supplier is the owner of that email.
             $rules['email'] = $rules['email'].','.$supplierDataValidated['id'].',id';
@@ -114,7 +113,6 @@ class Supplier extends Model
         return validator($supplierDataValidated, $rules)->validate();
     }
 
-    
     /*
      * RELATIONSHIPS
     */

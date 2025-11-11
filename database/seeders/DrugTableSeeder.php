@@ -21,7 +21,7 @@ class DrugTableSeeder extends Seeder
             'keywords' => 'paracetamol, drug, antihestamines',
             'img_path' => 'medicine.jpg',
             'price' => 6000,
-            'stock' => 10
+            'stock' => 10,
         ]);
 
         Drug::create([
@@ -33,7 +33,7 @@ class DrugTableSeeder extends Seeder
             'keywords' => 'acetominafen, drug, analgesics',
             'img_path' => 'medicine.jpg',
             'price' => 6000,
-            'stock' => 10
+            'stock' => 10,
         ]);
 
         Drug::create([
@@ -45,7 +45,7 @@ class DrugTableSeeder extends Seeder
             'keywords' => 'amoxicilina, drug, antibacterials',
             'img_path' => 'medicine.jpg',
             'price' => 10000,
-            'stock' => 10
+            'stock' => 10,
         ]);
 
         Drug::create([
@@ -57,7 +57,7 @@ class DrugTableSeeder extends Seeder
             'keywords' => 'ibuprofeno, drug, antiinflammatories',
             'img_path' => 'medicine.jpg',
             'price' => 9000,
-            'stock' => 10
+            'stock' => 10,
         ]);
 
     }

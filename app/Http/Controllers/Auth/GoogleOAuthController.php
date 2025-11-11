@@ -6,11 +6,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
-use Laravel\Socialite\Socialite;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Socialite;
 
 class GoogleOAuthController extends Controller
 {
@@ -27,7 +27,7 @@ class GoogleOAuthController extends Controller
             'email' => $googleUser->email,
         ], [
             'name' => $googleUser->name,
-            'email' => $googleUser->email
+            'email' => $googleUser->email,
         ]);
 
         Auth::login($user);

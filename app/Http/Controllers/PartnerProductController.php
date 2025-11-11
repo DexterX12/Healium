@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Http;
+use Illuminate\View\View;
 
 class PartnerProductController extends Controller
 {

@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\DrugResource;
 
 class SupplierResource extends JsonResource
 {
@@ -19,7 +18,7 @@ class SupplierResource extends JsonResource
             'id' => $this->getId(),
             'name' => $this->getName(),
             'email' => $this->getEmail(),
-            'provided_drugs' => DrugResource::collection($this->drugs)
+            'provided_drugs' => DrugResource::collection($this->drugs),
         ];
     }
 }

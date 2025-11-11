@@ -6,7 +6,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -78,12 +77,12 @@ class Item extends Model
         return $this->order;
     }
 
-    public function getCreatedAt(): String
+    public function getCreatedAt(): string
     {
         return $this->attributes['created_at'];
     }
 
-    public function getUpdatedAt(): String
+    public function getUpdatedAt(): string
     {
         return $this->attributes['updated_at'];
     }

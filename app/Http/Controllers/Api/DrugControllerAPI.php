@@ -16,6 +16,7 @@ class DrugControllerAPI extends Controller
     public function show(int $id): JsonResponse
     {
         $drug = new DrugResource(Drug::findOrFail($id));
+
         return response()->json($drug, 200);
     }
 }

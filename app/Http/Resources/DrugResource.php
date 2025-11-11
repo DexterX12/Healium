@@ -20,7 +20,7 @@ class DrugResource extends JsonResource
             'name' => $this->getName(),
             'price' => $this->getPrice(),
             'image_url' => $this->getImage(),
-            'purchase_url' => url('/drug/show/'.$this->getId())
+            'purchase_url' => url('/drug/show/'.$this->getId()),
         ];
     }
 }
