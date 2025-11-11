@@ -10,7 +10,7 @@ use Illuminate\View\View;
 
 class DrugControllerTest extends TestCase
 {
-    public function test_index_returns_view_with_all_drugs()
+    public function test_index_returns_view_with_all_drugs(): void
     {
         $mock = Mockery::mock('alias:App\Models\Drug');
         $mock->shouldReceive('all')->once()->andReturn(['drug1', 'drug2']);
@@ -27,7 +27,7 @@ class DrugControllerTest extends TestCase
         $this->assertEquals(['drug1', 'drug2'], $response->getData()['viewData']['drugs']);
     }
 
-    public function test_show_returns_view_with_drug_data()
+    public function test_show_returns_view_with_drug_data(): void
     {
         $mock = Mockery::mock('alias:App\Models\Drug');
         $mock->shouldReceive('with->findOrFail')
@@ -51,9 +51,8 @@ class DrugControllerTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_index_returns_view_with_filtered_drugs_by_name()
+    public function test_index_returns_view_with_filtered_drugs_by_name(): void
     {
-        // Simulamos el modelo estático Drug::searchByName('Paracetamol')
         $mock = \Mockery::mock('alias:App\Models\Drug');
         $mock->shouldReceive('searchByName')
             ->once()
@@ -62,17 +61,14 @@ class DrugControllerTest extends TestCase
                 ['id' => 1, 'name' => 'Paracetamol', 'category' => 'Antihestamines']
             ]);
 
-        // Request simulando el query ?name=Paracetamol
-        $request = \Illuminate\Http\Request::create('/drugs', 'GET', [
+        $request = Request::create('/drugs', 'GET', [
             'name' => 'Paracetamol'
         ]);
 
-        // Ejecutamos el método
-        $controller = new \App\Http\Controllers\DrugController();
+        $controller = new DrugController();
         $response = $controller->index($request);
 
-        // Verificaciones
-        $this->assertInstanceOf(\Illuminate\View\View::class, $response);
+        $this->assertInstanceOf(View::class, $response);
         $this->assertEquals('drug.index', $response->name());
         $this->assertArrayHasKey('viewData', $response->getData());
 
