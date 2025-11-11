@@ -121,7 +121,7 @@ class Drug extends Model
     {
         $image_path = $this->attributes['img_path'];
 
-        if (Str::isUrl($image_path))
+        if (Str::startsWith($image_path, "https://"))
             return $image_path;
         
         return url('/storage/'.$image_path);
