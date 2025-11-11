@@ -2,18 +2,16 @@
 
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Mockery;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
+    public function test_mockery_alias_works()
     {
-        $response = $this->get('/');
+        $mock = Mockery::mock('alias:App\Models\Drug');
+        $mock->shouldReceive('all')->andReturn(['mocked']);
 
-        $response->assertStatus(200);
+        $this->assertEquals(['mocked'], \App\Models\Drug::all());
     }
 }
