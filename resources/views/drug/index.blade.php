@@ -10,8 +10,8 @@
 		<div class="col-md-3 mb-2 mb-md-0">
 			<select name="sales_filter" class="form-select">
 				<option value="">{{ __('Filter by sales') }}</option>
-				<option value="asc" {{ request('sales_filter') == 'asc' ? 'selected' : '' }}>Lowest sales</option>
-				<option value="desc" {{ request('sales_filter') == 'desc' ? 'selected' : '' }}>Highest sales</option>
+				<option value="asc" {{ request('sales_filter') == 'asc' ? 'selected' : '' }}> {{ __('Lowest sales') }}</option>
+				<option value="desc" {{ request('sales_filter') == 'desc' ? 'selected' : '' }}> {{ __('Highest sales') }}</option>
 			</select>
 		</div>
 		<div class="col-md-2">
